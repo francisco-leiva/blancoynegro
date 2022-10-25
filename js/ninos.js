@@ -1,10 +1,9 @@
 //? VARIABLES PRODUCTOS //
-const primerSeccion = document.querySelector("#primerSeccion");
-const productosPrimerSeccion = listaProductos.slice(0, 4);
-const segundaSeccion = document.querySelector("#segundaSeccion");
-const productosSegundaSeccion = listaProductos.slice(4, 8);
-const terceraSeccion = document.querySelector("#terceraSeccion");
-const productosTerceraSeccion = listaProductos.slice(8, 12);
+const listaProductosNinios = listaProductos.filter(producto => producto.categoria == "niños");
+const primerSeccionNinios = document.querySelector("#primerSeccionNinios");
+const productosPrimerSeccionNinios = listaProductosNinios.slice(0, 4);
+const segundaSeccion = document.querySelector("#segundaSeccionNinios");
+const productosSegundaSeccionNinios = listaProductosNinios.slice(4, 8);
 
 //? VARIABLES CARRITO //
 const btnCarrito = document.querySelector("#cart");
@@ -19,11 +18,11 @@ const cantidadTotalProductos = document.querySelector(".cantidadCarrito");
 
 //! AGREGAR PRODUCTOS AL HTML //
 // PRIMERA SECCIÓN //
-productosPrimerSeccion.forEach(producto => {
-    primerSeccion.innerHTML += `
+productosPrimerSeccionNinios.forEach(producto => {
+    primerSeccionNinios.innerHTML += `
         <div class="col-xl-3 col-md-6 col-sm-6 my-2 sectorGaleria">
             <div class="card rounded-0">
-                <img src="${producto.img}" class="card-img-top" alt="${producto.tipo} ${producto.nombre}">
+                <img src=".${producto.img}" class="card-img-top" alt="${producto.tipo} ${producto.nombre}">
                 <div class="card-body">
                     <h2 class="card-title precio">$${producto.precio}</h2>
                     <p class="card-text descripcion">${producto.nombre}</p>
@@ -35,27 +34,11 @@ productosPrimerSeccion.forEach(producto => {
 })
 
 // SEGUNDA SECCIÓN //
-productosSegundaSeccion.forEach(producto => {
-    segundaSeccion.innerHTML += `
+productosSegundaSeccionNinios.forEach(producto => {
+    segundaSeccionNinios.innerHTML += `
         <div class="col-xl-3 col-md-6 col-sm-6 my-2 sectorGaleria">
             <div class="card rounded-0">
-                <img src="${producto.img}" class="card-img-top" alt="${producto.tipo} ${producto.nombre}">
-                <div class="card-body">
-                    <h2 class="card-title precio">$${producto.precio}</h2>
-                    <p class="card-text descripcion">${producto.nombre}</p>
-                    <a id="${producto.id}" class="btn botonComprar">Comprar</a>
-                </div>
-            </div>
-        </div>
-    `
-})
-
-// TERCERA SECCIÓN //
-productosTerceraSeccion.forEach(producto => {
-    terceraSeccion.innerHTML += `
-        <div class="col-xl-3 col-md-6 col-sm-6 my-2 sectorGaleria">
-            <div class="card rounded-0">
-                <img src="${producto.img}" class="card-img-top" alt="${producto.tipo} ${producto.nombre}">
+                <img src=".${producto.img}" class="card-img-top" alt="${producto.tipo} ${producto.nombre}">
                 <div class="card-body">
                     <h2 class="card-title precio">$${producto.precio}</h2>
                     <p class="card-text descripcion">${producto.nombre}</p>
@@ -77,6 +60,7 @@ cerrarCarrito.addEventListener("click", () => {
     ventanaCarrito.classList.remove("reveal");
 })
 
+
 //! AGREGAR AL CARRITO //
 const agregarAlCarrito = (e) => {
     let boton = e.target;
@@ -93,7 +77,7 @@ const actualizarCarrito = () => {
     carrito.forEach(producto => {
         contenedorProductosCarrito.innerHTML += `
             <div class="productoCarrito">
-                <img class="imgProductoCarrito" src="${producto.img}" alt="${producto.tipo} ${producto.nombre}">
+                <img class="imgProductoCarrito" src=".${producto.img}" alt="${producto.tipo} ${producto.nombre}">
                 <div>
                     <span class="nombreProductoCarrito">${producto.nombre}</span>
                     <span class="precioProductoCarrito">$${producto.precio}</span>
@@ -128,9 +112,9 @@ const eliminarDelCarrito = (prodId) => {
     let producto = carrito.find(prod => prod.id == prodId);
     let indice = carrito.indexOf(producto);
     carrito.splice(indice, 1);
-    
-    actualizarCarrito();
 
+    actualizarCarrito();
+        
     if (carrito.length == 0) {
         sessionStorage.clear();
     }

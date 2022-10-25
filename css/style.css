@@ -32,12 +32,12 @@ header {
     font-weight: bold; }
   .pageSector .sectorGaleria .descripcion {
     font-size: 0.8rem; }
-  .pageSector .sectorGaleria .button {
+  .pageSector .sectorGaleria .botonComprar {
     font-size: 0.75rem;
     color: white;
     background-color: black;
     border-radius: 0; }
-    .pageSector .sectorGaleria .button:hover {
+    .pageSector .sectorGaleria .botonComprar:hover {
       background-color: white;
       color: black;
       transition: 0.5s; }
@@ -57,20 +57,29 @@ header {
     margin-top: 0.5rem;
     margin-bottom: 0; }
   .pageContact form input {
+    width: 97%;
     font-size: 1rem;
     border: 1px solid black;
     border-radius: 0.75rem;
     outline: none;
     padding: 0.5rem;
-    margin: 0.5rem; }
+    margin: 0.2rem 0.5rem; }
   .pageContact form textarea {
+    width: 97%;
     font-size: 1rem;
     border: 1px solid black;
     border-radius: 0.75rem;
     outline: none;
     padding: 0.5rem;
-    margin: 0.5rem;
+    margin: 0.2rem 0.5rem;
     resize: none; }
+  .pageContact form .error {
+    border: 2px solid red; }
+  .pageContact form .textoError {
+    font-size: 0.80rem;
+    color: red;
+    margin-bottom: 0.5rem;
+    margin-left: 1rem; }
   .pageContact form .formButton {
     font-family: inherit;
     width: 5rem;
@@ -100,6 +109,117 @@ header {
     margin: 0.5rem; }
     .pageContact .map .mapText p {
       margin: 0; }
+
+/* CARRITO */
+.ventanaCarrito {
+  width: 100vw;
+  height: 100%;
+  position: fixed;
+  z-index: 2;
+  transform: translateX(200%);
+  transition: .5s ease-out; }
+
+.ventanaCarrito.reveal {
+  transform: translateX(0); }
+
+.carrito {
+  height: 80%;
+  width: 35%;
+  float: right;
+  margin: 1em 1em 0 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background-color: #B3B6B7;
+  border: 1px solid black;
+  border-radius: 20px; }
+
+#closeBtn {
+  position: absolute;
+  top: 15px;
+  font-size: 1.5em;
+  padding-left: 5px;
+  cursor: pointer; }
+
+.productosCarrito {
+  overflow: scroll;
+  overflow-x: hidden; }
+
+.productoCarrito {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap; }
+
+.imgProductoCarrito {
+  width: 8rem;
+  margin: 10px; }
+
+.precioProductoCarrito {
+  margin: 5px; }
+
+.cantidadProductoCarrrito {
+  width: 3rem;
+  margin: 0 5px; }
+
+.removeBtn {
+  color: red;
+  border: none;
+  background-color: #B3B6B7; }
+
+.total {
+  text-align: center;
+  margin-bottom: 10px; }
+
+.totalCarrito {
+  font-size: 1.7em;
+  margin: 0; }
+
+.precioTotalCarrito {
+  font-size: 1.3em; }
+
+.botonFinalizarCompra {
+  display: block;
+  font-size: .8em;
+  margin: auto;
+  padding: .2em;
+  color: white;
+  background-color: black;
+  border-radius: 0; }
+  .botonFinalizarCompra:hover {
+    background-color: white;
+    color: black;
+    transition: 0.5s; }
+
+/* BOTÓN CARRITO */
+.botonCarrito {
+  text-decoration: none;
+  color: black;
+  position: fixed;
+  z-index: 2;
+  right: 1em;
+  bottom: 1em;
+  background-color: white;
+  border: solid 1px black;
+  border-radius: 0.5em;
+  padding: .4em; }
+  .botonCarrito:hover {
+    background-color: black;
+    color: white;
+    transition: 0.3s; }
+  .botonCarrito #cart {
+    font-size: 2em;
+    margin: .1em;
+    cursor: pointer; }
+  .botonCarrito .cantidadCarrito {
+    color: black;
+    position: absolute;
+    top: .1em;
+    right: .2em;
+    background-color: #B3B6B7;
+    padding: 0 .3em;
+    border-radius: 15px;
+    font-weight: bold; }
 
 @media screen and (max-width: 576px) {
   /* MAIN */
@@ -162,8 +282,6 @@ footer {
   footer .contacto p {
     font-size: 0.75rem;
     margin: 0; }
-  footer .logoFooter {
-    display: none; }
 
 @media screen and (min-width: 1024px) {
   /* FOOTER */
@@ -171,7 +289,7 @@ footer {
     display: grid;
     grid-template-columns: 35% 20% auto;
     grid-template-rows: min-content;
-    grid-template-areas: "contacto media logofooter"; }
+    grid-template-areas: "contacto media ..."; }
     footer .socialMedia, footer .contacto {
       grid-area: media;
       margin-bottom: 0; }
@@ -188,11 +306,4 @@ footer {
         font-size: 1.5rem; }
       footer .contacto p {
         font-size: 1.10rem;
-        margin: 0.25rem 0; }
-    footer .logoFooter {
-      grid-area: logofooter;
-      display: inline;
-      width: 6.5rem;
-      align-self: center;
-      justify-self: end;
-      margin: 0.25rem; } }
+        margin: 0.25rem 0; } }

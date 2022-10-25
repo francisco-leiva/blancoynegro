@@ -8,7 +8,7 @@
     <title>Blanco y Negro - Mujer</title>
     <!-- META DESCRIPTION -->
     <meta name="description"
-        content="Descubrí tu Modelo Favorito en Blanco y Negro. Cuotas Sin Interés y Envíos a todo el País! Conocé la colección completa de la nueva temporada.">
+        content="Descubrí tu Modelo Favorito en Blanco y Negro. Cuotas Sin Interés y Envíos a todo el País! Conoce la colección completa de la nueva temporada.">
     <!-- FAVICON -->
     <link rel="shortcut icon" href="../img/logo-blanco-&-negro.png" type="image/x-icon">
     <!-- BOOTSTRAP -->
@@ -21,6 +21,29 @@
 </head>
 
 <body>
+    <!-- CARRITO -->
+    <div class="ventanaCarrito">
+        <div class="carrito">
+            <i id="closeBtn" class="bi bi-x"></i>
+
+            <div class="productosCarrito">
+                
+            </div>
+
+            <div class="total">
+                <h3 class="totalCarrito">TOTAL</h3>
+                <span class="precioTotalCarrito">$0</span>
+                <button class="botonFinalizarCompra">COMPRAR</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTÓN CARRITO COMPRAS -->
+    <a class="botonCarrito">
+        <i id="cart" class="bi bi-bag"></i>
+        <span class="cantidadCarrito">0</span>
+    </a>
+
     <!-- HEADER -->
     <header>
         <nav class="navbar navbar-expand-lg">
@@ -63,145 +86,8 @@
         <img src="../img/women-collection.jpg" alt="Colección Invierno Mujer" class="sectorBanner d-block">
 
         <!-- PRIMERA SECCIÓN -->
-        <div class="row">
-            <div class="col-xl-3 col-md-6 col-sm-6 my-2 sectorGaleria">
-                <div class="card rounded-0">
-                    <img src="../img/borcego-dina.jpg" class="card-img-top" alt="Borcegos Dina">
-                    <div class="card-body">
-                        <h2 class="card-title precio">$27000</h2>
-                        <p class="card-text descripcion">Borcegos Dina</p>
-                        <a href="#" class="btn button">Comprar</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-3 col-md-6 col-sm-6 my-2 sectorGaleria">
-                <div class="card rounded-0">
-                    <img src="../img/zapatillas-chicago-w.jpg" class="card-img-top" alt="Zapatillas Chicago W">
-                    <div class="card-body">
-                        <h2 class="card-title precio">$17500</h2>
-                        <p class="card-text descripcion">Zapatillas Chicago W</p>
-                        <a href="#" class="btn button">Comprar</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-3 col-md-6 col-sm-6 my-2 sectorGaleria">
-                <div class="card rounded-0">
-                    <img src="../img/zapatillas-peak.jpg" class="card-img-top" alt="Zapatillas Peak">
-                    <div class="card-body">
-                        <h2 class="card-title precio">$24900</h2>
-                        <p class="card-text descripcion">Zapatillas Peak</p>
-                        <a href="#" class="btn button">Comprar</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-3 col-md-6 col-sm-6 my-2 sectorGaleria">
-                <div class="card rounded-0">
-                    <img src="../img/zapatillas-pluton.jpg" class="card-img-top" alt="Zapatillas Plutón">
-                    <div class="card-body">
-                        <h2 class="card-title precio">$19900</h2>
-                        <p class="card-text descripcion">Zapatillas Plutón</p>
-                        <a href="#" class="btn button">Comprar</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- SEGUNDA SECCIÓN -->
-        <div class="row">
-            <div class="col-xl-3 col-md-6 col-sm-6 my-2 sectorGaleria">
-                <div class="card rounded-0">
-                    <img src="../img/zapatillas-maddie.jpg" class="card-img-top" alt="Zapatillas Maddie">
-                    <div class="card-body">
-                        <h2 class="card-title precio">$18500</h2>
-                        <p class="card-text descripcion">Zapatillas Maddie</p>
-                        <a href="#" class="btn button">Comprar</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-3 col-md-6 col-sm-6 my-2 sectorGaleria">
-                <div class="card rounded-0">
-                    <img src="../img/zapatillas-mixter.jpg" class="card-img-top" alt="Zapatillas Mixter">
-                    <div class="card-body">
-                        <h2 class="card-title precio">$16500</h2>
-                        <p class="card-text descripcion">Zapatillas Mixter</p>
-                        <a href="#" class="btn button">Comprar</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-3 col-md-6 col-sm-6 my-2 sectorGaleria">
-                <div class="card rounded-0">
-                    <img src="../img/borcego-lizary.jpg" class="card-img-top" alt="Borcegos Lizary">
-                    <div class="card-body">
-                        <h2 class="card-title precio">$34000</h2>
-                        <p class="card-text descripcion">Borcegos Lizary</p>
-                        <a href="#" class="btn button">Comprar</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-3 col-md-6 col-sm-6 my-2 sectorGaleria">
-                <div class="card rounded-0">
-                    <img src="../img/zapatillas-climbing.jpg" class="card-img-top" alt="Zapatillas Climbing">
-                    <div class="card-body">
-                        <h2 class="card-title precio">$16500</h2>
-                        <p class="card-text descripcion">Zapatillas Climbing</p>
-                        <a href="#" class="btn button">Comprar</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- TERCERA SECCIÓN -->
-        <div class="row">
-            <div class="col-xl-3 col-md-6 col-sm-6 my-2 sectorGaleria">
-                <div class="card rounded-0">
-                    <img src="../img/zapatillas-climbing-negras.jpg" class="card-img-top"
-                        alt="Zapatillas Climbing Negras">
-                    <div class="card-body">
-                        <h2 class="card-title precio">$25000</h2>
-                        <p class="card-text descripcion">Zapatillas Climbing</p>
-                        <a href="#" class="btn button">Comprar</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-3 col-md-6 col-sm-6 my-2 sectorGaleria">
-                <div class="card rounded-0">
-                    <img src="../img/zapatillas-katia.jpg" class="card-img-top" alt="Zapatillas Katia">
-                    <div class="card-body">
-                        <h2 class="card-title precio">$17500</h2>
-                        <p class="card-text descripcion">Zapatillas Katia</p>
-                        <a href="#" class="btn button">Comprar</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-3 col-md-6 col-sm-6 my-2 sectorGaleria">
-                <div class="card rounded-0">
-                    <img src="../img/zapatillas-montara.jpg" class="card-img-top" alt="Zapatillas Montara">
-                    <div class="card-body">
-                        <h2 class="card-title precio">$26500</h2>
-                        <p class="card-text descripcion">Zapatillas Montara</p>
-                        <a href="#" class="btn button">Comprar</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-3 col-md-6 col-sm-6 my-2 sectorGaleria">
-                <div class="card rounded-0">
-                    <img src="../img/zapatillas-nicky.jpg" class="card-img-top" alt="Zapatillas Nicky">
-                    <div class="card-body">
-                        <h2 class="card-title precio">$16500</h2>
-                        <p class="card-text descripcion">Zapatillas Nicky</p>
-                        <a href="#" class="btn button">Comprar</a>
-                    </div>
-                </div>
-            </div>
+        <div id="seccionMujer" class="row">
+            
         </div>
     </main>
 
@@ -221,16 +107,16 @@
             <p><i class="bi bi-envelope me-2"></i>leivap_cecilia@hotmail.com</p>
             <p><i class="bi bi-geo-alt me-2"></i>San Martín 77, Corral de Bustos, Córdoba.</p>
         </div>
-
-        <img src="../img/logo-blanco-&-negro.png" alt="Logo" class="logoFooter">
     </footer>
 
-    <!-- JavaScript -->
-    <script src="../js/main.js"></script>
     <!-- JS Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
         crossorigin="anonymous"></script>
+    <!-- JavaScript -->
+    <script src="../js/productos.js"></script>
+    <!-- JavaScript -->
+    <script src="../js/mujer.js"></script>
 </body>
 
 </html>
