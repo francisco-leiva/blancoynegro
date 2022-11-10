@@ -1,14 +1,18 @@
+// variables formulario
 const formulario = document.getElementById("form");
-const nombre = document.getElementById("inputNombre");
-const apellido = document.getElementById("inputApellido");
-const email = document.getElementById("inputEmail");
-const mensaje = document.getElementById("inputMensaje");
+const nombre = document.getElementById("user_name");
+const apellido = document.getElementById("user_lastname");
+const email = document.getElementById("user_email");
+const mensaje = document.getElementById("message");
+const btn = document.getElementById('button');
+
 
 formulario.addEventListener("submit", (e) => {
     e.preventDefault();
     validarCampos();
 })
 
+// validación de campos del formulario
 const validarCampos = () => {
     const valorNombre = nombre.value.trim();
     const valorApellido = apellido.value.trim();
@@ -42,9 +46,20 @@ const validarCampos = () => {
     } else {
         validacionCorrecta(mensaje);
     }
+
+    if (valorNombre != "" && valorApellido != "" && valorEmail != "" && valorMensaje != "") {
+        Swal.fire(
+            'Su mensaje ha sido enviado con éxito!',
+            'Responderemos a la brevedad!',
+            'success'
+        );
+        
+        formulario.reset()
+    }
 }
 
 
+// función error, campos vacíos
 const errorValidacion = (input, mensaje) => {
     const padre = input.parentElement;
     const parrafo = padre.querySelector("p")
@@ -52,6 +67,7 @@ const errorValidacion = (input, mensaje) => {
     input.className = "error";
 }
 
+// función campos completos
 const validacionCorrecta = (input) => {
     const padre = input.parentElement;
     const parrafo = padre.querySelector("p")

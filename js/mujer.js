@@ -1,115 +1,77 @@
-//? VARIABLES PRODUCTOS //
+// variables sección productos
 const seccionMujer = document.querySelector("#seccionMujer");
-const listaProductosMujer = listaProductos.filter(producto => producto.categoria == "mujer");
 
-//? VARIABLES CARRITO //
-const btnCarrito = document.querySelector("#cart");
-const ventanaCarrito = document.querySelector(".ventanaCarrito");
-const cerrarCarrito = document.querySelector("#closeBtn");
+// variables carrito
+const cantidadProductos = document.querySelector(".cantidadCarrito");
 
-//? VARIABLES PARA AGREGAR AL CARRITO //
-const contenedorProductosCarrito = document.querySelector(".productosCarrito");
-const totalCarrito = document.querySelector(".precioTotalCarrito");
-const cantidadTotalProductos = document.querySelector(".cantidadCarrito");
-
-
-//! AGREGAR PRODUCTOS AL HTML //
-listaProductosMujer.forEach(producto => {
-    seccionMujer.innerHTML += `
-        <div class="col-xl-3 col-md-6 col-sm-6 my-2 sectorGaleria">
-            <div class="card rounded-0">
-                <img src=".${producto.img}" class="card-img-top" alt="${producto.tipo} ${producto.nombre}">
-                <div class="card-body">
-                    <h2 class="card-title precio">$${producto.precio}</h2>
-                    <p class="card-text descripcion">${producto.nombre}</p>
-                    <a id="${producto.id}" class="btn botonComprar">Comprar</a>
-                </div>
-            </div>
-        </div>
-    `
+// cargar productos del storage
+document.addEventListener("DOMContentLoaded", () => {
+    carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    actualizarCantidadCarrito();
 })
 
+// agregando los productos al html
+fetch("../productos.json")
+    .then(response => response.json())
+    .then(result => {
+        const listaProductos = result;
+        const listaProductosMujer = listaProductos.filter(producto => producto.categoria == "mujer");
 
-//! ABRIR CARRITO //
-btnCarrito.addEventListener("click", () => {
-    ventanaCarrito.classList.add("reveal");
-})
-
-//! CERRAR CARRITO //
-cerrarCarrito.addEventListener("click", () => {
-    ventanaCarrito.classList.remove("reveal");
-})
-
-
-//! AGREGAR AL CARRITO //
-const agregarAlCarrito = (e) => {
-    let boton = e.target;
-    let prodId = boton.getAttribute("id");
-
-    let producto = listaProductos.find(prod => prod.id == prodId);
-    carrito.push(producto);
-
-    actualizarCarrito();
-}
-
-const actualizarCarrito = () => {
-    contenedorProductosCarrito.innerHTML = '';
-    carrito.forEach(producto => {
-        contenedorProductosCarrito.innerHTML += `
-            <div class="productoCarrito">
-                <img class="imgProductoCarrito" src=".${producto.img}" alt="${producto.tipo} ${producto.nombre}">
-                <div>
-                    <span class="nombreProductoCarrito">${producto.nombre}</span>
-                    <span class="precioProductoCarrito">$${producto.precio}</span>
+        listaProductosMujer.forEach(producto => {
+            seccionMujer.innerHTML += `
+                <div class="col-xl-3 col-md-6 col-sm-6 my-2 sectorGaleria">
+                    <div class="card rounded-0">
+                        <img src=".${producto.img}" class="card-img-top" alt="${producto.tipo} ${producto.nombre}">
+                        <div class="card-body">
+                            <h2 class="card-title precio">$${producto.precio}</h2>
+                            <p class="card-text descripcion">${producto.nombre}</p>
+                            <a id="${producto.id}" class="btn botonComprar">Comprar</a>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <input type="number" value="1" class="cantidadProductoCarrrito">
-                    <button onclick="eliminarDelCarrito(${producto.id})" class="removeBtn"><i class="bi bi-trash"></i></button>
-                </div>
-            </div>
-        `
+            `
+        })
 
-        sessionStorage.setItem("carrito", JSON.stringify(carrito));
+        // agregar productos al carrito
+        const agregarAlCarrito = (e) => {
+            let boton = e.target;
+            let prodId = boton.getAttribute("id");
+
+            let productoYaExiste = carrito.some(prod => prod.id == prodId);
+
+            if (productoYaExiste) {
+                const prod = carrito.map(prod => {
+                    if (prod.id == prodId) {
+                        prod.cantidad++
+                    }
+                })
+            } else {
+                let producto = listaProductos.find(prod => prod.id == prodId);
+                carrito.push(producto);
+            }
+
+            actualizarCantidadCarrito();
+            localStorage.setItem("carrito", JSON.stringify(carrito));
+
+            Toastify({
+                text: "Tu producto se añadió al carrito",
+                duration: 3000,
+                style: {
+                    color: "black",
+                    background: "#FFBD59",
+                }
+            }).showToast();
+        }
+
+        // ejecutar agregar productos carrito
+        const botonesComprar = document.querySelectorAll(".botonComprar");
+
+        botonesComprar.forEach(boton => {
+            boton.addEventListener("click", agregarAlCarrito);
+        })
     })
 
-    actualizarTotalCarrito();
-    actualizarCantidadCarrito();
-}
-
-//! ACTUALIZAR PRECIO CARRITO //
-const actualizarTotalCarrito = () => {
-    let total = carrito.reduce((acc, producto) => acc + producto.precio, 0);
-    totalCarrito.innerHTML = `$${total}`;
-}
-
-//! ACTUALIZAR CANTIDAD DE ELEMENTOS DEL CARRITO //
+// actualizar cantidad de productos del carrito
 const actualizarCantidadCarrito = () => {
-    cantidadTotalProductos.textContent = carrito.length;
+    cantidadProductos.textContent = carrito.length;
 }
-
-//! ELIMINAR PRODUCTO DEL CARRITO //
-const eliminarDelCarrito = (prodId) => {
-    let producto = carrito.find(prod => prod.id == prodId);
-    let indice = carrito.indexOf(producto);
-    carrito.splice(indice, 1);
-
-    actualizarCarrito();
-        
-    if (carrito.length == 0) {
-        sessionStorage.clear();
-    }
-}
-
-//? EJECUTAR AGREGAR PROD CARRITO
-const botonesComprar = document.querySelectorAll(".botonComprar");
-
-botonesComprar.forEach(boton => {
-    boton.addEventListener("click", agregarAlCarrito);
-})
-
-
-//? CARGAR PRODUCTOS DEL STORAGE
-document.addEventListener("DOMContentLoaded", () => {
-    carrito = JSON.parse(sessionStorage.getItem("carrito")) || [];
-    actualizarCarrito();
-})

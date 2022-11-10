@@ -1,14 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blanco y Negro - Niños</title>
-    <!-- META DESCRIPTION -->
-    <meta name="description"
-        content="Descubrí tu Modelo Favorito para tus Niños en Blanco y Negro. Cuotas Sin Interés y Envíos a todo el País! Conoce la colección completa de la nueva temporada.">
+    <title>Carrito de compras</title>
     <!-- FAVICON -->
     <link rel="shortcut icon" href="../img/logo-blanco-&-negro.png" type="image/x-icon">
     <!-- BOOTSTRAP -->
@@ -18,17 +14,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <!-- TOASTIFY CSS -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <!-- SWEET ALERT CSS -->
+    <link rel="stylesheet" href="sweetalert2.min.css">
     <!-- CSS -->
     <link rel="stylesheet" href="../css/style.css">
 </head>
-
 <body>
-    <!-- BOTÓN CARRITO COMPRAS -->
-    <a href="./carrito.html" class="botonCarrito">
-        <i id="cart" class="bi bi-bag"></i>
-        <span class="cantidadCarrito">0</span>
-    </a>
-    
     <!-- HEADER -->
     <header>
         <nav class="navbar navbar-expand-lg">
@@ -54,7 +45,7 @@
                             <a class="nav-link" href="./hombre.html">HOMBRE</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="./ninos.html">NIÑOS</a>
+                            <a class="nav-link" href="./ninos.html">NIÑOS</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="./contacto.html">CONTACTO</a>
@@ -65,24 +56,21 @@
         </nav>
     </header>
 
-    <!-- SECTOR PÁGINA PRINCIPAL -->
-    <main class="pageSector container-fluid">
-        <!-- BANNER PRINCIPAL -->
-        <img src="../img/mes-de-la-ninez.jpg" alt="Mes de la Niñez" class="sectorBanner d-block">
+    <main>
+        <div id="carrito">
+            <div class="carritoVacio">
+                <h3>Tu carrito está vacío</h3>
+            </div>
 
-        <!-- PRIMER SECCIÓN -->
-        <div id="primerSeccionNinios" class="row">
-            
-        </div>
+            <div id="productosCarrito" class="hidden">
+                
+            </div>
 
-        <!-- BANNER -->
-        <div>
-            <img src="../img/coleccion-ninos.jpg" class="sectorBanner d-block" alt="Colección Invierno Niños">
-        </div>
-
-        <!-- SEGUNDA SECCIÓN -->
-        <div id="segundaSeccionNinios" class="row">
-            
+            <div class="finalizarCompra hidden">
+                <h3 class="totalCarrito">TOTAL</h3>
+                <span class="precioTotalCarrito">$0</span>
+                <button class="botonFinalizarCompra">Finalizar Compra</button>
+            </div>
         </div>
     </main>
 
@@ -110,9 +98,9 @@
         crossorigin="anonymous"></script>
     <!-- JS Toastify -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <!-- JS Sweet Alert -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Local JavaScript -->
     <script src="../js/carrito.js"></script>
-    <script src="../js/ninos.js"></script>
 </body>
-
 </html>

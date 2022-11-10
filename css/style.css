@@ -82,12 +82,12 @@ header {
     margin-left: 1rem; }
   .pageContact form .formButton {
     font-family: inherit;
-    width: 5rem;
+    width: 10rem;
     font-size: 1rem;
     background-color: black;
     color: white;
     border: 1px solid black;
-    border-radius: 0;
+    border-radius: 10px;
     margin: 0 auto 0.5rem;
     padding: 0.25rem; }
     .pageContact form .formButton:hover {
@@ -111,85 +111,81 @@ header {
       margin: 0; }
 
 /* CARRITO */
-.ventanaCarrito {
-  width: 100vw;
-  height: 100%;
-  position: fixed;
-  z-index: 2;
-  transform: translateX(200%);
-  transition: .5s ease-out; }
-
-.ventanaCarrito.reveal {
-  transform: translateX(0); }
-
-.carrito {
-  height: 80%;
-  width: 35%;
-  float: right;
-  margin: 1em 1em 0 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  background-color: #B3B6B7;
+#carrito {
+  min-height: 380px;
+  width: 80%;
+  margin: 0.75rem auto;
+  background-color: #C8C8C8;
   border: 1px solid black;
   border-radius: 20px; }
+  #carrito .carritoVacio {
+    text-align: center;
+    margin: 180px 0; }
+  #carrito .producto {
+    display: grid;
+    grid-template-columns: 28% 25% 25% 14% 8%;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas: "img nombre precio cantidad eliminar";
+    justify-items: center;
+    align-items: center; }
+    #carrito .producto .imgProductoCarrito {
+      grid-area: img;
+      width: 8rem;
+      margin: 10px; }
+    #carrito .producto .nombreProductoCarrito {
+      grid-area: nombre; }
+    #carrito .producto .precioProductoCarrito {
+      grid-area: precio;
+      margin: 5px; }
+    #carrito .producto .cantidadProductoCarrito {
+      grid-area: cantidad; }
+    #carrito .producto .removeBtn {
+      grid-area: eliminar;
+      color: red;
+      border: none;
+      background-color: #C8C8C8; }
+  #carrito .finalizarCompra {
+    display: grid;
+    grid-template-columns: 53% 25% 22%;
+    grid-template-rows: 60px;
+    gap: 0px 0px;
+    grid-template-areas: "total precioTotal btn";
+    justify-items: center;
+    align-items: center;
+    margin: 15px 0; }
+    #carrito .finalizarCompra .totalCarrito {
+      grid-area: total;
+      justify-self: flex-end;
+      font-size: 1.7em;
+      margin: 0; }
+    #carrito .finalizarCompra .precioTotalCarrito {
+      grid-area: precioTotal;
+      font-size: 1.3em; }
+    #carrito .finalizarCompra .botonFinalizarCompra {
+      grid-area: btn;
+      font-size: .8em;
+      padding: .2em;
+      color: white;
+      background-color: black;
+      border-radius: 0; }
+      #carrito .finalizarCompra .botonFinalizarCompra:hover {
+        background-color: white;
+        color: black;
+        transition: 0.5s; }
+  #carrito .hidden {
+    display: none; }
 
-#closeBtn {
-  position: absolute;
-  top: 15px;
-  font-size: 1.5em;
-  padding-left: 5px;
-  cursor: pointer; }
+/* SWEET ALERT */
+#swal2-title.swal2-title {
+  color: black; }
 
-.productosCarrito {
-  overflow: scroll;
-  overflow-x: hidden; }
+#swal2-html-container.swal2-html-container {
+  color: grey; }
 
-.productoCarrito {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap; }
-
-.imgProductoCarrito {
-  width: 8rem;
-  margin: 10px; }
-
-.precioProductoCarrito {
-  margin: 5px; }
-
-.cantidadProductoCarrrito {
-  width: 3rem;
-  margin: 0 5px; }
-
-.removeBtn {
-  color: red;
-  border: none;
-  background-color: #B3B6B7; }
-
-.total {
-  text-align: center;
-  margin-bottom: 10px; }
-
-.totalCarrito {
-  font-size: 1.7em;
-  margin: 0; }
-
-.precioTotalCarrito {
-  font-size: 1.3em; }
-
-.botonFinalizarCompra {
-  display: block;
-  font-size: .8em;
-  margin: auto;
-  padding: .2em;
+.swal2-styled.swal2-confirm {
   color: white;
-  background-color: black;
-  border-radius: 0; }
-  .botonFinalizarCompra:hover {
-    background-color: white;
-    color: black;
-    transition: 0.5s; }
+  background-color: black; }
 
 /* BOTÓN CARRITO */
 .botonCarrito {
@@ -240,7 +236,8 @@ header {
     box-shadow: 0.25rem 0.20rem 0.5rem; }
     .pageContact form h2 {
       font-size: 2rem; }
-    .pageContact form input, .pageContact form textarea {
+    .pageContact form input,
+    .pageContact form textarea {
       font-size: 1.5rem; }
     .pageContact form .formButton {
       font-size: 1.5rem; } }
