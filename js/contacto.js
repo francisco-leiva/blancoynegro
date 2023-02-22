@@ -20,32 +20,16 @@ const validarCampos = () => {
     const valorMensaje = mensaje.value.trim();
 
     // Validar campo nombre
-    if (valorNombre == "") {
-        errorValidacion(nombre, "*Campo incompleto");
-    } else {
-        validacionCorrecta(nombre);
-    }
+    valorNombre == "" ? errorValidacion(nombre, "*Campo incompleto") : validacionCorrecta(nombre);
 
     // Validar campo apellido
-    if (valorApellido == "") {
-        errorValidacion(apellido, "*Campo incompleto");
-    } else {
-        validacionCorrecta(apellido);
-    }
+    valorApellido == "" ? errorValidacion(apellido, "*Campo incompleto") : validacionCorrecta(apellido);
 
     // Validar campo email
-    if (valorEmail == "") {
-        errorValidacion(email, "*Campo incompleto");
-    } else {
-        validacionCorrecta(email);
-    }
+    valorEmail == "" ? errorValidacion(email, "*Campo incompleto") : validacionCorrecta(email);
 
     // Validar campo mensaje
-    if (valorMensaje == "") {
-        errorValidacion(mensaje, "*Campo incompleto");
-    } else {
-        validacionCorrecta(mensaje);
-    }
+    valorMensaje == "" ? errorValidacion(mensaje, "*Campo incompleto") : validacionCorrecta(mensaje);
 
     if (valorNombre != "" && valorApellido != "" && valorEmail != "" && valorMensaje != "") {
         Swal.fire(

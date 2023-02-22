@@ -21,9 +21,7 @@ const botonFinalizarCompra = document.querySelector(".botonFinalizarCompra");
 document.addEventListener("DOMContentLoaded", () => {
     carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
-    if (cantidadProductos) {
-        actualizarCantidadCarrito();
-    }
+    cantidadProductos ? actualizarCantidadCarrito() : false;
 
     if (contenedorCarrito && carrito.length != 0) {
         carritoVacio.classList.add("hidden");
@@ -34,17 +32,35 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 })
 
+// función para agregar productos a las secciones
+const addProducts = (productList, section) => {
+    productList.forEach(prod => {
+        section.innerHTML += `
+                    <div class="col-xl-3 col-md-6 col-sm-6 my-2 sectorGaleria">
+                        <div class="card rounded-0">
+                            <img src=".${prod.img}" class="card-img-top" alt="${prod.tipo} ${prod.nombre}">
+                            <div class="card-body">
+                                <h2 class="card-title precio">$${prod.precio}</h2>
+                                <p class="card-text descripcion">${prod.nombre}</p>
+                                <a id="${prod.id}" class="btn botonComprar">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+    })
+}
+
 // agregando productos al html
 fetch("../productos.json")
     .then(response => response.json())
     .then(result => {
-        // variables listas de productos
+        // listas de productos
         const listaProductos = result;
         const listaProductosHombre = listaProductos.filter(producto => producto.categoria == "hombre");
         const listaProductosMujer = listaProductos.filter(producto => producto.categoria == "mujer");
         const listaProductosNinios = listaProductos.filter(producto => producto.categoria == "niños");
 
-        // variables productos por secciones
+        // productos por secciones
         let productosPrimerSeccionInicio = listaProductos.slice(0, 4);
         let productosSegundaSeccionInicio = listaProductos.slice(4, 8);
         let productosTerceraSeccionInicio = listaProductos.slice(8, 12);
@@ -54,122 +70,27 @@ fetch("../productos.json")
 
         if (primerSeccionInicio && segundaSeccionInicio && terceraSeccionInicio) {
             // agregar productos a la primer sección de inicio
-            productosPrimerSeccionInicio.forEach(producto => {
-                primerSeccionInicio.innerHTML += `
-                    <div class="col-xl-3 col-md-6 col-sm-6 my-2 sectorGaleria">
-                        <div class="card rounded-0">
-                            <img src="${producto.img}" class="card-img-top" alt="${producto.tipo} ${producto.nombre}">
-                            <div class="card-body">
-                                <h2 class="card-title precio">$${producto.precio}</h2>
-                                <p class="card-text descripcion">${producto.nombre}</p>
-                                <a id="${producto.id}" class="btn botonComprar">Comprar</a>
-                            </div>
-                        </div>
-                    </div>
-                `
-            })
+            addProducts(productosPrimerSeccionInicio, primerSeccionInicio);
 
             // agregar productos a la segunda sección de inicio
-            productosSegundaSeccionInicio.forEach(producto => {
-                segundaSeccionInicio.innerHTML += `
-                    <div class="col-xl-3 col-md-6 col-sm-6 my-2 sectorGaleria">
-                        <div class="card rounded-0">
-                            <img src="${producto.img}" class="card-img-top" alt="${producto.tipo} ${producto.nombre}">
-                            <div class="card-body">
-                                <h2 class="card-title precio">$${producto.precio}</h2>
-                                <p class="card-text descripcion">${producto.nombre}</p>
-                                <a id="${producto.id}" class="btn botonComprar">Comprar</a>
-                            </div>
-                        </div>
-                    </div>
-                `
-            })
+            addProducts(productosSegundaSeccionInicio, segundaSeccionInicio);
 
             // agregar productos a la tercer sección de inicio
-            productosTerceraSeccionInicio.forEach(producto => {
-                terceraSeccionInicio.innerHTML += `
-                    <div class="col-xl-3 col-md-6 col-sm-6 my-2 sectorGaleria">
-                        <div class="card rounded-0">
-                            <img src="${producto.img}" class="card-img-top" alt="${producto.tipo} ${producto.nombre}">
-                            <div class="card-body">
-                                <h2 class="card-title precio">$${producto.precio}</h2>
-                                <p class="card-text descripcion">${producto.nombre}</p>
-                                <a id="${producto.id}" class="btn botonComprar">Comprar</a>
-                            </div>
-                        </div>
-                    </div>
-                `
-            })
+            addProducts(productosTerceraSeccionInicio, terceraSeccionInicio);
         }
 
-        if (seccionHombre) {
-            // agregar productos a la sección hombre
-            listaProductosHombre.forEach(producto => {
-                seccionHombre.innerHTML += `
-                    <div class="col-xl-3 col-md-6 col-sm-6 my-2 sectorGaleria">
-                        <div class="card rounded-0">
-                            <img src=".${producto.img}" class="card-img-top" alt="${producto.tipo} ${producto.nombre}">
-                            <div class="card-body">
-                                <h2 class="card-title precio">$${producto.precio}</h2>
-                                <p class="card-text descripcion">${producto.nombre}</p>
-                                <a id="${producto.id}" class="btn botonComprar">Comprar</a>
-                            </div>
-                        </div>
-                    </div>
-                `
-            })
-        }
+        // agregar productos a la sección hombre
+        seccionHombre ? addProducts(listaProductosHombre, seccionHombre) : null;
 
-        if (seccionMujer) {
-            // agregar productos a la sección mujer
-            listaProductosMujer.forEach(producto => {
-                seccionMujer.innerHTML += `
-                    <div class="col-xl-3 col-md-6 col-sm-6 my-2 sectorGaleria">
-                        <div class="card rounded-0">
-                            <img src=".${producto.img}" class="card-img-top" alt="${producto.tipo} ${producto.nombre}">
-                            <div class="card-body">
-                                <h2 class="card-title precio">$${producto.precio}</h2>
-                                <p class="card-text descripcion">${producto.nombre}</p>
-                                <a id="${producto.id}" class="btn botonComprar">Comprar</a>
-                            </div>
-                        </div>
-                    </div>
-                `
-            })
-        }
+        // agregar productos a la sección mujer
+        seccionMujer ? addProducts(listaProductosMujer, seccionMujer) : null;
 
         if (primerSeccionNinios && segundaSeccionNinios) {
             // agregando productos a la primer sección niños
-            productosPrimerSeccionNinios.forEach(producto => {
-                primerSeccionNinios.innerHTML += `
-                    <div class="col-xl-3 col-md-6 col-sm-6 my-2 sectorGaleria">
-                        <div class="card rounded-0">
-                            <img src=".${producto.img}" class="card-img-top" alt="${producto.tipo} ${producto.nombre}">
-                            <div class="card-body">
-                                <h2 class="card-title precio">$${producto.precio}</h2>
-                                <p class="card-text descripcion">${producto.nombre}</p>
-                                <a id="${producto.id}" class="btn botonComprar">Comprar</a>
-                            </div>
-                        </div>
-                    </div>
-                `
-            })
+            addProducts(productosPrimerSeccionNinios, primerSeccionNinios);
 
             // agregando productos a la segunda sección niños
-            productosSegundaSeccionNinios.forEach(producto => {
-                segundaSeccionNinios.innerHTML += `
-                    <div class="col-xl-3 col-md-6 col-sm-6 my-2 sectorGaleria">
-                        <div class="card rounded-0">
-                            <img src=".${producto.img}" class="card-img-top" alt="${producto.tipo} ${producto.nombre}">
-                            <div class="card-body">
-                                <h2 class="card-title precio">$${producto.precio}</h2>
-                                <p class="card-text descripcion">${producto.nombre}</p>
-                                <a id="${producto.id}" class="btn botonComprar">Comprar</a>
-                            </div>
-                        </div>
-                    </div>
-                `
-            })
+            addProducts(productosSegundaSeccionNinios, segundaSeccionNinios);
         }
 
         // agregar productos al carrito
@@ -180,7 +101,7 @@ fetch("../productos.json")
             let productoYaExiste = carrito.some(prod => prod.id == prodId);
 
             if (productoYaExiste) {
-                const prod = carrito.map(prod => {
+                carrito.map(prod => {
                     if (prod.id == prodId) {
                         prod.cantidad++
                     }
@@ -219,7 +140,7 @@ const actualizarCantidadCarrito = () => {
 // agregar los productos al carrito
 const actualizarCarrito = () => {
     contenedorProductosCarrito.innerHTML = '';
-    carrito.forEach(producto => {
+    carrito && carrito.forEach(producto => {
         contenedorProductosCarrito.innerHTML += `
             <div class="producto">
                 <img class="imgProductoCarrito" src=".${producto.img}" alt="${producto.tipo} ${producto.nombre}">
