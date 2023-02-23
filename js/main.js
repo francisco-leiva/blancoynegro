@@ -50,87 +50,87 @@ const addProducts = (productList, section) => {
     })
 }
 
-// agregando productos al html
-fetch("../productos.json")
-    .then(response => response.json())
-    .then(result => {
-        // listas de productos
-        const listaProductos = result;
-        const listaProductosHombre = listaProductos.filter(producto => producto.categoria == "hombre");
-        const listaProductosMujer = listaProductos.filter(producto => producto.categoria == "mujer");
-        const listaProductosNinios = listaProductos.filter(producto => producto.categoria == "niños");
+// llamado a los productos y añadiéndolos al html
+const llamadoProductos = async () => {
+    const response = await fetch(primerSeccionInicio ? "./productos.json" : "../productos.json");
+    const listaProductos = await response.json();
 
-        // productos por secciones
-        let productosPrimerSeccionInicio = listaProductos.slice(0, 4);
-        let productosSegundaSeccionInicio = listaProductos.slice(4, 8);
-        let productosTerceraSeccionInicio = listaProductos.slice(8, 12);
-        let productosPrimerSeccionNinios = listaProductosNinios.slice(0, 4);
-        let productosSegundaSeccionNinios = listaProductosNinios.slice(4, 8);
+    // separando productos por categoría
+    const listaProductosHombre = listaProductos.filter(producto => producto.categoria == "hombre");
+    const listaProductosMujer = listaProductos.filter(producto => producto.categoria == "mujer");
+    const listaProductosNinios = listaProductos.filter(producto => producto.categoria == "niños");
+
+    // separando productos por secciones
+    let productosPrimerSeccionInicio = listaProductos.slice(0, 4);
+    let productosSegundaSeccionInicio = listaProductos.slice(4, 8);
+    let productosTerceraSeccionInicio = listaProductos.slice(8, 12);
+    let productosPrimerSeccionNinios = listaProductosNinios.slice(0, 4);
+    let productosSegundaSeccionNinios = listaProductosNinios.slice(4, 8);
 
 
-        if (primerSeccionInicio && segundaSeccionInicio && terceraSeccionInicio) {
-            // agregar productos a la primer sección de inicio
-            addProducts(productosPrimerSeccionInicio, primerSeccionInicio);
+    // añadiendo productos a las secciones de inicio
+    if (primerSeccionInicio && segundaSeccionInicio && terceraSeccionInicio) {
+        addProducts(productosPrimerSeccionInicio, primerSeccionInicio);
 
-            // agregar productos a la segunda sección de inicio
-            addProducts(productosSegundaSeccionInicio, segundaSeccionInicio);
+        addProducts(productosSegundaSeccionInicio, segundaSeccionInicio);
 
-            // agregar productos a la tercer sección de inicio
-            addProducts(productosTerceraSeccionInicio, terceraSeccionInicio);
-        }
+        addProducts(productosTerceraSeccionInicio, terceraSeccionInicio);
+    }
 
-        // agregar productos a la sección hombre
-        seccionHombre ? addProducts(listaProductosHombre, seccionHombre) : null;
+    // añadiendo productos a la sección hombre
+    seccionHombre ? addProducts(listaProductosHombre, seccionHombre) : null;
 
-        // agregar productos a la sección mujer
-        seccionMujer ? addProducts(listaProductosMujer, seccionMujer) : null;
+    // añadiendo productos a la sección mujer
+    seccionMujer ? addProducts(listaProductosMujer, seccionMujer) : null;
 
-        if (primerSeccionNinios && segundaSeccionNinios) {
-            // agregando productos a la primer sección niños
-            addProducts(productosPrimerSeccionNinios, primerSeccionNinios);
+    // añadiendo productos a las secciones de niños
+    if (primerSeccionNinios && segundaSeccionNinios) {
+        addProducts(productosPrimerSeccionNinios, primerSeccionNinios);
 
-            // agregando productos a la segunda sección niños
-            addProducts(productosSegundaSeccionNinios, segundaSeccionNinios);
-        }
+        addProducts(productosSegundaSeccionNinios, segundaSeccionNinios);
+    }
 
-        // agregar productos al carrito
-        const agregarAlCarrito = (e) => {
-            let boton = e.target;
-            let prodId = boton.getAttribute("id");
+    // agregar productos al carrito
+    const agregarAlCarrito = (e) => {
+        let boton = e.target;
+        let prodId = boton.getAttribute("id");
 
-            let productoYaExiste = carrito.some(prod => prod.id == prodId);
+        let productoYaExiste = carrito.some(prod => prod.id == prodId);
 
-            if (productoYaExiste) {
-                carrito.map(prod => {
-                    if (prod.id == prodId) {
-                        prod.cantidad++
-                    }
-                })
-            } else {
-                let producto = listaProductos.find(prod => prod.id == prodId);
-                carrito.push(producto);
-            }
-
-            actualizarCantidadCarrito();
-            localStorage.setItem("carrito", JSON.stringify(carrito));
-
-            Toastify({
-                text: "Tu producto se añadió al carrito",
-                duration: 3000,
-                style: {
-                    color: "black",
-                    background: "#FFBD59",
+        if (productoYaExiste) {
+            carrito.map(prod => {
+                if (prod.id == prodId) {
+                    prod.cantidad++
                 }
-            }).showToast();
+            })
+        } else {
+            let producto = listaProductos.find(prod => prod.id == prodId);
+            carrito.push(producto);
         }
 
-        // ejecutar agregar productos carrito
-        const botonesComprar = document.querySelectorAll(".botonComprar");
+        actualizarCantidadCarrito();
+        localStorage.setItem("carrito", JSON.stringify(carrito));
 
-        botonesComprar.forEach(boton => {
-            boton.addEventListener("click", agregarAlCarrito);
-        })
-    });
+        Toastify({
+            text: "Tu producto se añadió al carrito",
+            duration: 3000,
+            style: {
+                color: "black",
+                background: "#FFBD59",
+            }
+        }).showToast();
+    }
+
+    // ejecutar agregar productos carrito
+    const botonesComprar = document.querySelectorAll(".botonComprar");
+
+    botonesComprar.forEach(boton => {
+        boton.addEventListener("click", agregarAlCarrito);
+    })
+};
+
+// ejecutando función asincrónica
+llamadoProductos()
 
 // actualizar cantidad de productos del carrito
 const actualizarCantidadCarrito = () => {
@@ -189,7 +189,7 @@ const eliminarDelCarrito = (prodId) => {
 }
 
 // finalizar compra
-if (contenedorCarrito) {
+contenedorCarrito &&
     botonFinalizarCompra.addEventListener("click", () => {
         Swal.fire(
             'Compra realizada con éxito!',
@@ -203,4 +203,3 @@ if (contenedorCarrito) {
         contenedorProductosCarrito.classList.add("hidden");
         finalizarCompra.classList.add("hidden");
     })
-}
