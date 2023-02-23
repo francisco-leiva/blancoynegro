@@ -38,7 +38,7 @@ const addProducts = (productList, section) => {
         section.innerHTML += `
                     <div class="col-xl-3 col-md-6 col-sm-6 my-2 sectorGaleria">
                         <div class="card rounded-0">
-                            <img src=".${prod.img}" class="card-img-top" alt="${prod.tipo} ${prod.nombre}">
+                            <img src="${primerSeccionInicio ? prod.img : `.${prod.img}`}" class="card-img-top" alt="${prod.tipo} ${prod.nombre}">
                             <div class="card-body">
                                 <h2 class="card-title precio">$${prod.precio}</h2>
                                 <p class="card-text descripcion">${prod.nombre}</p>
