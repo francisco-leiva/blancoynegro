@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
 const addProducts = (productList, section) => {
     productList.forEach(prod => {
         section.innerHTML += `
-                    <div class="col-xl-3 col-md-6 col-sm-6 my-2 sectorGaleria">
+                    <article class="col-xl-3 col-md-6 col-sm-6 my-2 sectorGaleria">
                         <div class="card rounded-0">
                             <img src="${primerSeccionInicio ? prod.img : `.${prod.img}`}" class="card-img-top" alt="${prod.tipo} ${prod.nombre}">
                             <div class="card-body">
@@ -45,7 +45,7 @@ const addProducts = (productList, section) => {
                                 <a id="${prod.id}" class="btn botonComprar">Comprar</a>
                             </div>
                         </div>
-                    </div>
+                    </article>
                 `;
     })
 }
@@ -142,13 +142,13 @@ const actualizarCarrito = () => {
     contenedorProductosCarrito.innerHTML = '';
     carrito && carrito.forEach(producto => {
         contenedorProductosCarrito.innerHTML += `
-            <div class="producto">
+            <article class="producto">
                 <img class="imgProductoCarrito" src=".${producto.img}" alt="${producto.tipo} ${producto.nombre}">
                 <span class="nombreProductoCarrito">${producto.tipo} ${producto.nombre}</span>
                 <span class="precioProductoCarrito">$${producto.precio * producto.cantidad}</span>
                 <span class="cantidadProductoCarrito">Cantidad: ${producto.cantidad}</span>
                 <button onclick="eliminarDelCarrito(${producto.id})" class="removeBtn"><i class="bi bi-trash"></i></button>
-            </div>
+            </article>
         `
     })
 
