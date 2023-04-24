@@ -32,7 +32,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 })
 
-// función para agregar productos a las secciones
+// obtener datos
+const getData = async () => {
+    const response = await fetch(primerSeccionInicio ? "./productos.json" : "../productos.json");
+    const data = await response.json();
+    data && showData(data);
+};
+
+// ejecutando función asíncrona
+getData();
+
+// agregar productos a las secciones
 const addProducts = (productList, section) => {
     productList.forEach(prod => {
         section.innerHTML += `
@@ -50,26 +60,21 @@ const addProducts = (productList, section) => {
     })
 }
 
-// llamado a los productos y añadiéndolos al html
-const llamadoProductos = async () => {
-    const response = await fetch(primerSeccionInicio ? "./productos.json" : "../productos.json");
-    const listaProductos = await response.json();
+const showData = (data) => {
+    // separar productos por categoría
+    const listaProductosHombre = data.filter(producto => producto.categoria == "hombre");
+    const listaProductosMujer = data.filter(producto => producto.categoria == "mujer");
+    const listaProductosNinios = data.filter(producto => producto.categoria == "niños");
 
-    // separando productos por categoría
-    const listaProductosHombre = listaProductos.filter(producto => producto.categoria == "hombre");
-    const listaProductosMujer = listaProductos.filter(producto => producto.categoria == "mujer");
-    const listaProductosNinios = listaProductos.filter(producto => producto.categoria == "niños");
-
-    // separando productos por secciones
-    let productosPrimerSeccionInicio = listaProductos.slice(0, 4);
-    let productosSegundaSeccionInicio = listaProductos.slice(4, 8);
-    let productosTerceraSeccionInicio = listaProductos.slice(8, 12);
+    // separar productos por secciones
+    let productosPrimerSeccionInicio = data.slice(0, 4);
+    let productosSegundaSeccionInicio = data.slice(4, 8);
+    let productosTerceraSeccionInicio = data.slice(8, 12);
     let productosPrimerSeccionNinios = listaProductosNinios.slice(0, 4);
     let productosSegundaSeccionNinios = listaProductosNinios.slice(4, 8);
 
-
-    // añadiendo productos a las secciones de inicio
-    if (primerSeccionInicio && segundaSeccionInicio && terceraSeccionInicio) {
+    // añadir productos a las secciones de inicio
+    if (primerSeccionInicio) {
         addProducts(productosPrimerSeccionInicio, primerSeccionInicio);
 
         addProducts(productosSegundaSeccionInicio, segundaSeccionInicio);
@@ -77,14 +82,14 @@ const llamadoProductos = async () => {
         addProducts(productosTerceraSeccionInicio, terceraSeccionInicio);
     }
 
-    // añadiendo productos a la sección hombre
+    // añadir productos a la sección hombre
     seccionHombre ? addProducts(listaProductosHombre, seccionHombre) : null;
 
-    // añadiendo productos a la sección mujer
+    // añadir productos a la sección mujer
     seccionMujer ? addProducts(listaProductosMujer, seccionMujer) : null;
 
-    // añadiendo productos a las secciones de niños
-    if (primerSeccionNinios && segundaSeccionNinios) {
+    // añadir productos a las secciones de niños
+    if (primerSeccionNinios) {
         addProducts(productosPrimerSeccionNinios, primerSeccionNinios);
 
         addProducts(productosSegundaSeccionNinios, segundaSeccionNinios);
@@ -104,7 +109,7 @@ const llamadoProductos = async () => {
                 }
             })
         } else {
-            let producto = listaProductos.find(prod => prod.id == prodId);
+            let producto = data.find(prod => prod.id == prodId);
             carrito.push(producto);
         }
 
@@ -127,10 +132,7 @@ const llamadoProductos = async () => {
     botonesComprar.forEach(boton => {
         boton.addEventListener("click", agregarAlCarrito);
     })
-};
-
-// ejecutando función asincrónica
-llamadoProductos()
+}
 
 // actualizar cantidad de productos del carrito
 const actualizarCantidadCarrito = () => {
@@ -140,22 +142,24 @@ const actualizarCantidadCarrito = () => {
 // agregar los productos al carrito
 const actualizarCarrito = () => {
     contenedorProductosCarrito.innerHTML = '';
-    carrito && carrito.forEach(producto => {
-        contenedorProductosCarrito.innerHTML += `
-            <article class="producto">
-                <img class="imgProductoCarrito" src=".${producto.img}" alt="${producto.tipo} ${producto.nombre}">
-                <span class="nombreProductoCarrito">${producto.tipo} ${producto.nombre}</span>
-                <span class="precioProductoCarrito">$${producto.precio * producto.cantidad}</span>
-                <span class="cantidadProductoCarrito">Cantidad: ${producto.cantidad}</span>
-                <button onclick="eliminarDelCarrito(${producto.id})" class="removeBtn"><i class="bi bi-trash"></i></button>
-            </article>
-        `
-    })
+    carrito.length !== 0
+        ? carrito.forEach(producto => {
+            contenedorProductosCarrito.innerHTML += `
+                <article class="producto">
+                    <img class="imgProductoCarrito" src=".${producto.img}" alt="${producto.tipo} ${producto.nombre}">
+                    <span class="nombreProductoCarrito">${producto.tipo} ${producto.nombre}</span>
+                    <span class="precioProductoCarrito">$${producto.precio * producto.cantidad}</span>
+                    <span class="cantidadProductoCarrito">Cantidad: ${producto.cantidad}</span>
+                    <button onclick="eliminarDelCarrito(${producto.id})" class="removeBtn"><i class="bi bi-trash"></i></button>
+                </article>
+            `
+        })
+        : null
 
     actualizarTotalCarrito();
 }
 
-// suma total de precios de los productos del carrito
+// suma total de precios del carrito
 const actualizarTotalCarrito = () => {
     let total = carrito.reduce((acc, producto) => acc + producto.precio * producto.cantidad, 0);
     precioTotal.innerHTML = `$${total}`;
