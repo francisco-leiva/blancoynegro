@@ -33,17 +33,14 @@ document.addEventListener("DOMContentLoaded", () => {
 })
 
 // obtener datos
-const getData = async () => {
+async function getData () {
     const response = await fetch(primerSeccionInicio ? "./productos.json" : "../productos.json");
     const data = await response.json();
-    data && showData(data);
+    return data;
 };
 
-// ejecutando función asíncrona
-getData();
-
-// agregar productos a las secciones
-const addProducts = (productList, section) => {
+// función para agregar productos a las diferentes secciones
+function addProducts (productList, section) {
     productList.forEach(prod => {
         section.innerHTML += `
                     <article class="col-xl-3 col-md-6 col-sm-6 my-2 sectorGaleria">
@@ -60,73 +57,46 @@ const addProducts = (productList, section) => {
     })
 }
 
-const showData = (data) => {
-    // separar productos por categoría
-    const listaProductosHombre = data.filter(producto => producto.categoria == "hombre");
-    const listaProductosMujer = data.filter(producto => producto.categoria == "mujer");
-    const listaProductosNinios = data.filter(producto => producto.categoria == "niños");
+// funciones para añadir productos a las diferentes páginas
+async function mostrarProductos () {
+    const listaProductos = await getData();
+
+    // separar productos en categorías
+    const listaProductosHombre = listaProductos.filter(producto => producto.categoria == "hombre");
+    const listaProductosMujer = listaProductos.filter(producto => producto.categoria == "mujer");
+    const listaProductosNinios = listaProductos.filter(producto => producto.categoria == "niños");
 
     // separar productos por secciones
-    let productosPrimerSeccionInicio = data.slice(0, 4);
-    let productosSegundaSeccionInicio = data.slice(4, 8);
-    let productosTerceraSeccionInicio = data.slice(8, 12);
-    let productosPrimerSeccionNinios = listaProductosNinios.slice(0, 4);
-    let productosSegundaSeccionNinios = listaProductosNinios.slice(4, 8);
+    const productosPrimerSeccionInicio = listaProductos.slice(0, 4);
+    const productosSegundaSeccionInicio = listaProductos.slice(4, 8);
+    const productosTerceraSeccionInicio = listaProductos.slice(8, 12);
+    const productosPrimerSeccionNinios = listaProductosNinios.slice(0, 4);
+    const productosSegundaSeccionNinios = listaProductosNinios.slice(4, 8);
 
-    // añadir productos a las secciones de inicio
+    // añadir productos por páginas
+    // añadir productos inicio
     if (primerSeccionInicio) {
         addProducts(productosPrimerSeccionInicio, primerSeccionInicio);
 
         addProducts(productosSegundaSeccionInicio, segundaSeccionInicio);
-
+    
         addProducts(productosTerceraSeccionInicio, terceraSeccionInicio);
     }
 
-    // añadir productos a la sección hombre
-    seccionHombre ? addProducts(listaProductosHombre, seccionHombre) : null;
+    // añadir productos hombres
+    if (seccionHombre) addProducts(listaProductosHombre, seccionHombre);
 
-    // añadir productos a la sección mujer
-    seccionMujer ? addProducts(listaProductosMujer, seccionMujer) : null;
+    // añadir productos mujeres
+    if (seccionMujer) addProducts(listaProductosMujer, seccionMujer);
 
-    // añadir productos a las secciones de niños
+    // añadir productos niños
     if (primerSeccionNinios) {
         addProducts(productosPrimerSeccionNinios, primerSeccionNinios);
 
         addProducts(productosSegundaSeccionNinios, segundaSeccionNinios);
     }
-
-    // agregar productos al carrito
-    const agregarAlCarrito = (e) => {
-        let boton = e.target;
-        let prodId = boton.getAttribute("id");
-
-        let productoYaExiste = carrito.some(prod => prod.id == prodId);
-
-        if (productoYaExiste) {
-            carrito.map(prod => {
-                if (prod.id == prodId) {
-                    prod.cantidad++
-                }
-            })
-        } else {
-            let producto = data.find(prod => prod.id == prodId);
-            carrito.push(producto);
-        }
-
-        actualizarCantidadCarrito();
-        localStorage.setItem("carrito", JSON.stringify(carrito));
-
-        Toastify({
-            text: "Tu producto se añadió al carrito",
-            duration: 3000,
-            style: {
-                color: "black",
-                background: "#FFBD59",
-            }
-        }).showToast();
-    }
-
-    // ejecutar agregar productos carrito
+    
+    // añadir funcionalidad a los botones de compra
     const botonesComprar = document.querySelectorAll(".botonComprar");
 
     botonesComprar.forEach(boton => {
@@ -134,13 +104,49 @@ const showData = (data) => {
     })
 }
 
+// ejecutar función para añadir productos a las distintas páginas
+mostrarProductos();
+
+// funciones de carrito
+// agregar productos al carrito
+async function agregarAlCarrito (e) {
+    const boton = e.target;
+    const prodId = boton.getAttribute("id");
+
+    const productoYaExiste = carrito.some(prod => prod.id == prodId);
+
+    if (productoYaExiste) {
+        carrito.map(prod => {
+            if (prod.id == prodId) {
+                prod.cantidad++
+            }
+        })
+    } else {
+        const listaProductos = await getData();
+        const producto = listaProductos.find(prod => prod.id == prodId);
+        carrito.push(producto);
+    }
+
+    actualizarCantidadCarrito();
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+
+    Toastify({
+        text: "Tu producto se añadió al carrito",
+        duration: 3000,
+        style: {
+            color: "black",
+            background: "#FFBD59",
+        }
+    }).showToast();
+}
+
 // actualizar cantidad de productos del carrito
-const actualizarCantidadCarrito = () => {
+function actualizarCantidadCarrito () {
     cantidadProductos.textContent = carrito.length;
 }
 
 // agregar los productos al carrito
-const actualizarCarrito = () => {
+function actualizarCarrito () {
     contenedorProductosCarrito.innerHTML = '';
     carrito.length !== 0
         ? carrito.forEach(producto => {
@@ -160,17 +166,17 @@ const actualizarCarrito = () => {
 }
 
 // suma total de precios del carrito
-const actualizarTotalCarrito = () => {
-    let total = carrito.reduce((acc, producto) => acc + producto.precio * producto.cantidad, 0);
+function actualizarTotalCarrito () {
+    const total = carrito.reduce((acc, producto) => acc + producto.precio * producto.cantidad, 0);
     precioTotal.innerHTML = `$${total}`;
 }
 
 
 // eliminar un producto del carrito
-const eliminarDelCarrito = (prodId) => {
-    let producto = carrito.find(prod => prod.id == prodId);
+function eliminarDelCarrito (prodId) {
+    const producto = carrito.find(prod => prod.id == prodId);
 
-    let indice = carrito.indexOf(producto);
+    const indice = carrito.indexOf(producto);
     carrito.splice(indice, 1);
 
     Toastify({
