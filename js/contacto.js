@@ -1,60 +1,58 @@
-// variables formulario
-const formulario = document.getElementById("form");
-const nombre = document.getElementById("user_name");
-const apellido = document.getElementById("user_lastname");
-const email = document.getElementById("user_email");
-const mensaje = document.getElementById("message");
-const btn = document.getElementById('button');
+// form variables
+const form = document.getElementById('form')
+const formName = document.getElementById('user_name')
+const formLastName = document.getElementById('user_lastname')
+const formEmail = document.getElementById('user_email')
+const formMessage = document.getElementById('message')
+const btn = document.getElementById('button')
 
-
-formulario.addEventListener("submit", (e) => {
-    e.preventDefault();
-    validarCampos();
+form.addEventListener('submit', (e) => {
+  e.preventDefault()
+  validateFields()
 })
 
-// validación de campos del formulario
-const validarCampos = () => {
-    const valorNombre = nombre.value.trim();
-    const valorApellido = apellido.value.trim();
-    const valorEmail = email.value.trim();
-    const valorMensaje = mensaje.value.trim();
+// validate form fields
+function validateFields() {
+  const name = formName.value.trim()
+  const lastName = formLastName.value.trim()
+  const email = formEmail.value.trim()
+  const message = formMessage.value.trim()
 
-    // Validar campo nombre
-    valorNombre == "" ? errorValidacion(nombre, "*Campo incompleto") : validacionCorrecta(nombre);
+  // validate name
+  name == '' ? error(formName) : success(formName)
 
-    // Validar campo apellido
-    valorApellido == "" ? errorValidacion(apellido, "*Campo incompleto") : validacionCorrecta(apellido);
+  // validate last name
+  lastName == '' ? error(formLastName) : success(formLastName)
 
-    // Validar campo email
-    valorEmail == "" ? errorValidacion(email, "*Campo incompleto") : validacionCorrecta(email);
+  // validate email
+  email == '' ? error(formEmail) : success(formEmail)
 
-    // Validar campo mensaje
-    valorMensaje == "" ? errorValidacion(mensaje, "*Campo incompleto") : validacionCorrecta(mensaje);
+  // validate message
+  message == '' ? error(formMessage) : success(formMessage)
 
-    if (valorNombre != "" && valorApellido != "" && valorEmail != "" && valorMensaje != "") {
-        Swal.fire(
-            'Su mensaje ha sido enviado con éxito!',
-            'Responderemos a la brevedad!',
-            'success'
-        );
-        
-        formulario.reset()
-    }
+  if (name && lastName && email && message) {
+    Swal.fire(
+      'Su mensaje ha sido enviado con éxito!',
+      'Responderemos a la brevedad!',
+      'success'
+    )
+
+    form.reset()
+  }
 }
 
-
-// función error, campos vacíos
-const errorValidacion = (input, mensaje) => {
-    const padre = input.parentElement;
-    const parrafo = padre.querySelector("p")
-    parrafo.innerText = mensaje;
-    input.className = "error";
+// error function
+function error(input) {
+  const parent = input.parentElement
+  const paragraph = parent.querySelector('p')
+  paragraph.innerText = '*Campo incompleto'
+  input.className = 'error'
 }
 
-// función campos completos
-const validacionCorrecta = (input) => {
-    const padre = input.parentElement;
-    const parrafo = padre.querySelector("p")
-    parrafo.innerText = "";
-    input.classList.remove("error");
+// success function
+function success(input) {
+  const parent = input.parentElement
+  const paragraph = parent.querySelector('p')
+  paragraph.innerText = ''
+  input.classList.remove('error')
 }

@@ -1,34 +1,296 @@
 [
-    { "id": 1, "nombre": "Lexington", "tipo": "Zapatillas", "cantidad": 1, "precio": 21000, "categoria": "hombre", "img": "./img/zapatillas-lexington.jpg" },
-    { "id": 2, "nombre": "Dina", "tipo": "Borcegos", "cantidad": 1, "precio": 27000, "categoria": "mujer", "img": "./img/borcego-dina.jpg" },
-    { "id": 3, "nombre": "Demeter", "tipo": "Borcegos", "cantidad": 1, "precio": 29000, "categoria": "hombre", "img": "./img/borcego-demeter.jpg" },
-    { "id": 4, "nombre": "Chicago W", "tipo": "Zapatillas", "cantidad": 1, "precio": 17500, "categoria": "mujer", "img": "./img/zapatillas-chicago-w.jpg" },
-    { "id": 5, "nombre": "Acton", "tipo": "Mocasines", "color": "Marrones", "cantidad": 1, "precio": 24000, "categoria": "hombre", "img": "./img/mocasines-acton-marrones.jpg" },
-    { "id": 6, "nombre": "Bone", "tipo": "Mocasines", "color": "Azules", "cantidad": 1, "precio": 9900, "categoria": "hombre", "img": "./img/mocasines-bone-azules.jpg" },
-    { "id": 7, "nombre": "Acton", "tipo": "Mocasines", "color": "Beige", "cantidad": 1, "precio": 24000, "categoria": "hombre", "img": "./img/mocasines-acton-beige.jpg" },
-    { "id": 8, "nombre": "Bone", "tipo": "Mocasines", "color": "Marrones", "cantidad": 1, "precio": 9900, "categoria": "hombre", "img": "./img/mocasines-bone-marrones.jpg" },
-    { "id": 9, "nombre": "Climbing", "tipo": "Zapatillas", "color": "Negras", "cantidad": 1, "precio": 25000, "categoria": "mujer", "img": "./img/zapatillas-climbing-negras.jpg" },
-    { "id": 10, "nombre": "Peak", "tipo": "Zapatillas", "cantidad": 1, "precio": 24900, "categoria": "mujer", "img": "./img/zapatillas-peak.jpg" },
-    { "id": 11, "nombre": "Montara", "tipo": "Zapatillas", "cantidad": 1, "precio": 26500, "categoria": "mujer", "img": "./img/zapatillas-montara.jpg" },
-    { "id": 12, "nombre": "Climbing", "tipo": "Zapatillas", "color": "Marrones", "cantidad": 1, "precio": 25000, "categoria": "mujer", "img": "./img/zapatillas-climbing.jpg" },
-    { "id": 13, "nombre": "Detroit", "tipo": "Zapatillas", "cantidad": 1, "precio": 19000, "categoria": "hombre", "img": "./img/zapatillas-detroit.jpg" },
-    { "id": 14, "nombre": "New Church", "tipo": "Zapatillas", "cantidad": 1, "precio": 21000, "categoria": "hombre", "img": "./img/zapatillas-new-church.jpg" },
-    { "id": 15, "nombre": "Holden", "tipo": "Borcegos", "cantidad": 1, "precio": 33500, "categoria": "hombre", "img": "./img/borcego-holden.jpg" },
-    { "id": 16, "nombre": "Marc", "tipo": "Zapatillas", "cantidad": 1, "precio": 19000, "categoria": "hombre", "img": "./img/zapatillas-marc.jpg" },
-    { "id": 17, "nombre": "Maxx", "tipo": "Zapatillas", "cantidad": 1, "precio": 19000, "categoria": "hombre", "img": "./img/zapatillas-maxx.jpg" },
-    { "id": 18, "nombre": "New Sky", "tipo": "Zapatillas", "cantidad": 1, "precio": 21000, "categoria": "hombre", "img": "./img/zapatillas-new-sky.jpg" },
-    { "id": 19, "nombre": "Pluton", "tipo": "Zapatillas", "cantidad": 1, "precio": 19900, "categoria": "mujer", "img": "./img/zapatillas-pluton.jpg" },
-    { "id": 20, "nombre": "Maddie", "tipo": "Zapatillas", "cantidad": 1, "precio": 18500, "categoria": "mujer", "img": "./img/zapatillas-maddie.jpg" },
-    { "id": 21, "nombre": "Mixter", "tipo": "Zapatillas", "cantidad": 1, "precio": 16500, "categoria": "mujer", "img": "./img/zapatillas-mixter.jpg" },
-    { "id": 22, "nombre": "Lizary", "tipo": "Borcegos", "cantidad": 1, "precio": 34000, "categoria": "mujer", "img": "./img/borcego-lizary.jpg" },
-    { "id": 23, "nombre": "Katia", "tipo": "Zapatillas", "cantidad": 1, "precio": 17500, "categoria": "mujer", "img": "./img/zapatillas-katia.jpg" },
-    { "id": 24, "nombre": "Nicky", "tipo": "Zapatillas", "cantidad": 1, "precio": 16500, "categoria": "mujer", "img": "./img/zapatillas-nicky.jpg" },
-    { "id": 25, "nombre": "Kolly", "tipo": "Borcegos", "cantidad": 1, "precio": 14500, "categoria": "niños", "img": "./img/borcegos-kolly.jpg" },
-    { "id": 26, "nombre": "Manhattan", "tipo": "Zapatillas", "cantidad": 1, "precio": 9000, "categoria": "niños", "img": "./img/zapatillas-manhattan.jpg" },
-    { "id": 27, "nombre": "Salva", "tipo": "Zapatillas", "cantidad": 1, "precio": 9000, "categoria": "niños", "img": "./img/zapatillas-salva.jpg" },
-    { "id": 28, "nombre": "Chloe", "tipo": "Zapatillas", "cantidad": 1, "precio": 11500, "categoria": "niños", "img": "./img/zapatillas-chloe.jpg" },
-    { "id": 29, "nombre": "Mount", "tipo": "Zapatillas", "cantidad": 1, "precio": 13900, "categoria": "niños", "img": "./img/zapatillas-mount.jpg" },
-    { "id": 30, "nombre": "Syra", "tipo": "Zapatillas", "cantidad": 1, "precio": 11500, "categoria": "niños", "img": "./img/zapatillas-syra.jpg" },
-    { "id": 31, "nombre": "Sierra", "tipo": "Zapatillas", "cantidad": 1, "precio": 13900, "categoria": "niños", "img": "./img/zapatillas-sierra.jpg" },
-    { "id": 32, "nombre": "Kildy", "tipo": "Zapatillas", "cantidad": 1, "precio": 11500, "categoria": "niños", "img": "./img/zapatillas-kildy.jpg" }
+  {
+    "id": 1,
+    "name": "Lexington",
+    "type": "Zapatillas",
+    "quantity": 1,
+    "price": 21000,
+    "category": "hombre",
+    "img": "./img/zapatillas-lexington.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Dina",
+    "type": "Borcegos",
+    "quantity": 1,
+    "price": 27000,
+    "category": "mujer",
+    "img": "./img/borcego-dina.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Demeter",
+    "type": "Borcegos",
+    "quantity": 1,
+    "price": 29000,
+    "category": "hombre",
+    "img": "./img/borcego-demeter.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Chicago W",
+    "type": "Zapatillas",
+    "quantity": 1,
+    "price": 17500,
+    "category": "mujer",
+    "img": "./img/zapatillas-chicago-w.jpg"
+  },
+  {
+    "id": 5,
+    "name": "Acton",
+    "type": "Mocasines",
+    "color": "Marrones",
+    "quantity": 1,
+    "price": 24000,
+    "category": "hombre",
+    "img": "./img/mocasines-acton-marrones.jpg"
+  },
+  {
+    "id": 6,
+    "name": "Bone",
+    "type": "Mocasines",
+    "color": "Azules",
+    "quantity": 1,
+    "price": 9900,
+    "category": "hombre",
+    "img": "./img/mocasines-bone-azules.jpg"
+  },
+  {
+    "id": 7,
+    "name": "Acton",
+    "type": "Mocasines",
+    "color": "Beige",
+    "quantity": 1,
+    "price": 24000,
+    "category": "hombre",
+    "img": "./img/mocasines-acton-beige.jpg"
+  },
+  {
+    "id": 8,
+    "name": "Bone",
+    "type": "Mocasines",
+    "color": "Marrones",
+    "quantity": 1,
+    "price": 9900,
+    "category": "hombre",
+    "img": "./img/mocasines-bone-marrones.jpg"
+  },
+  {
+    "id": 9,
+    "name": "Climbing",
+    "type": "Zapatillas",
+    "color": "Negras",
+    "quantity": 1,
+    "price": 25000,
+    "category": "mujer",
+    "img": "./img/zapatillas-climbing-negras.jpg"
+  },
+  {
+    "id": 10,
+    "name": "Peak",
+    "type": "Zapatillas",
+    "quantity": 1,
+    "price": 24900,
+    "category": "mujer",
+    "img": "./img/zapatillas-peak.jpg"
+  },
+  {
+    "id": 11,
+    "name": "Montara",
+    "type": "Zapatillas",
+    "quantity": 1,
+    "price": 26500,
+    "category": "mujer",
+    "img": "./img/zapatillas-montara.jpg"
+  },
+  {
+    "id": 12,
+    "name": "Climbing",
+    "type": "Zapatillas",
+    "color": "Marrones",
+    "quantity": 1,
+    "price": 25000,
+    "category": "mujer",
+    "img": "./img/zapatillas-climbing.jpg"
+  },
+  {
+    "id": 13,
+    "name": "Detroit",
+    "type": "Zapatillas",
+    "quantity": 1,
+    "price": 19000,
+    "category": "hombre",
+    "img": "./img/zapatillas-detroit.jpg"
+  },
+  {
+    "id": 14,
+    "name": "New Church",
+    "type": "Zapatillas",
+    "quantity": 1,
+    "price": 21000,
+    "category": "hombre",
+    "img": "./img/zapatillas-new-church.jpg"
+  },
+  {
+    "id": 15,
+    "name": "Holden",
+    "type": "Borcegos",
+    "quantity": 1,
+    "price": 33500,
+    "category": "hombre",
+    "img": "./img/borcego-holden.jpg"
+  },
+  {
+    "id": 16,
+    "name": "Marc",
+    "type": "Zapatillas",
+    "quantity": 1,
+    "price": 19000,
+    "category": "hombre",
+    "img": "./img/zapatillas-marc.jpg"
+  },
+  {
+    "id": 17,
+    "name": "Maxx",
+    "type": "Zapatillas",
+    "quantity": 1,
+    "price": 19000,
+    "category": "hombre",
+    "img": "./img/zapatillas-maxx.jpg"
+  },
+  {
+    "id": 18,
+    "name": "New Sky",
+    "type": "Zapatillas",
+    "quantity": 1,
+    "price": 21000,
+    "category": "hombre",
+    "img": "./img/zapatillas-new-sky.jpg"
+  },
+  {
+    "id": 19,
+    "name": "Pluton",
+    "type": "Zapatillas",
+    "quantity": 1,
+    "price": 19900,
+    "category": "mujer",
+    "img": "./img/zapatillas-pluton.jpg"
+  },
+  {
+    "id": 20,
+    "name": "Maddie",
+    "type": "Zapatillas",
+    "quantity": 1,
+    "price": 18500,
+    "category": "mujer",
+    "img": "./img/zapatillas-maddie.jpg"
+  },
+  {
+    "id": 21,
+    "name": "Mixter",
+    "type": "Zapatillas",
+    "quantity": 1,
+    "price": 16500,
+    "category": "mujer",
+    "img": "./img/zapatillas-mixter.jpg"
+  },
+  {
+    "id": 22,
+    "name": "Lizary",
+    "type": "Borcegos",
+    "quantity": 1,
+    "price": 34000,
+    "category": "mujer",
+    "img": "./img/borcego-lizary.jpg"
+  },
+  {
+    "id": 23,
+    "name": "Katia",
+    "type": "Zapatillas",
+    "quantity": 1,
+    "price": 17500,
+    "category": "mujer",
+    "img": "./img/zapatillas-katia.jpg"
+  },
+  {
+    "id": 24,
+    "name": "Nicky",
+    "type": "Zapatillas",
+    "quantity": 1,
+    "price": 16500,
+    "category": "mujer",
+    "img": "./img/zapatillas-nicky.jpg"
+  },
+  {
+    "id": 25,
+    "name": "Kolly",
+    "type": "Borcegos",
+    "quantity": 1,
+    "price": 14500,
+    "category": "niños",
+    "img": "./img/borcegos-kolly.jpg"
+  },
+  {
+    "id": 26,
+    "name": "Manhattan",
+    "type": "Zapatillas",
+    "quantity": 1,
+    "price": 9000,
+    "category": "niños",
+    "img": "./img/zapatillas-manhattan.jpg"
+  },
+  {
+    "id": 27,
+    "name": "Salva",
+    "type": "Zapatillas",
+    "quantity": 1,
+    "price": 9000,
+    "category": "niños",
+    "img": "./img/zapatillas-salva.jpg"
+  },
+  {
+    "id": 28,
+    "name": "Chloe",
+    "type": "Zapatillas",
+    "quantity": 1,
+    "price": 11500,
+    "category": "niños",
+    "img": "./img/zapatillas-chloe.jpg"
+  },
+  {
+    "id": 29,
+    "name": "Mount",
+    "type": "Zapatillas",
+    "quantity": 1,
+    "price": 13900,
+    "category": "niños",
+    "img": "./img/zapatillas-mount.jpg"
+  },
+  {
+    "id": 30,
+    "name": "Syra",
+    "type": "Zapatillas",
+    "quantity": 1,
+    "price": 11500,
+    "category": "niños",
+    "img": "./img/zapatillas-syra.jpg"
+  },
+  {
+    "id": 31,
+    "name": "Sierra",
+    "type": "Zapatillas",
+    "quantity": 1,
+    "price": 13900,
+    "category": "niños",
+    "img": "./img/zapatillas-sierra.jpg"
+  },
+  {
+    "id": 32,
+    "name": "Kildy",
+    "type": "Zapatillas",
+    "quantity": 1,
+    "price": 11500,
+    "category": "niños",
+    "img": "./img/zapatillas-kildy.jpg"
+  }
 ]

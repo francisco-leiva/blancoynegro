@@ -1,215 +1,229 @@
-// variables sección productos
-const primerSeccionInicio = document.querySelector("#primerSeccion");
-const segundaSeccionInicio = document.querySelector("#segundaSeccion");
-const terceraSeccionInicio = document.querySelector("#terceraSeccion");
-const seccionHombre = document.querySelector("#seccionHombre");
-const seccionMujer = document.querySelector("#seccionMujer");
-const primerSeccionNinios = document.querySelector("#primerSeccionNinios");
-const segundaSeccionNinios = document.querySelector("#segundaSeccionNinios");
+// product section variables
+const firstHomeSection = document.querySelector('#primerSeccion')
+const secondHomeSection = document.querySelector('#segundaSeccion')
+const thirdHomeSection = document.querySelector('#terceraSeccion')
+const menSection = document.querySelector('#seccionHombre')
+const womenSection = document.querySelector('#seccionMujer')
+const firstChildSection = document.querySelector('#primerSeccionNinios')
+const secondChildSection = document.querySelector('#segundaSeccionNinios')
 
-// variables carrito
-let carrito = [];
-const cantidadProductos = document.querySelector(".cantidadCarrito");
-const contenedorCarrito = document.querySelector("#carrito")
-const carritoVacio = document.querySelector(".carritoVacio");
-const contenedorProductosCarrito = document.querySelector("#productosCarrito");
-const finalizarCompra = document.querySelector(".finalizarCompra");
-const precioTotal = document.querySelector(".precioTotalCarrito");
-const botonFinalizarCompra = document.querySelector(".botonFinalizarCompra");
+// cart variables
+let cart = []
+const cartQuantity = document.querySelector('.cantidadCarrito')
+const cartContainer = document.querySelector('#carrito')
+const emptyCart = document.querySelector('.carritoVacio')
+const cartProductContainer = document.querySelector('#productosCarrito')
+const finishBuying = document.querySelector('.finalizarCompra')
+const totalPrice = document.querySelector('.precioTotalCarrito')
+const buttonFinishBuying = document.querySelector('.botonFinalizarCompra')
 
-// cargar productos del storage
-document.addEventListener("DOMContentLoaded", () => {
-    carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+// load products from storage
+document.addEventListener('DOMContentLoaded', () => {
+  cart = JSON.parse(localStorage.getItem('cart')) || []
 
-    cantidadProductos ? actualizarCantidadCarrito() : false;
+  cartQuantity ? updateCartQuantity() : null
 
-    if (contenedorCarrito && carrito.length != 0) {
-        carritoVacio.classList.add("hidden");
-        contenedorProductosCarrito.classList.remove("hidden");
-        finalizarCompra.classList.remove("hidden");
+  if (cartContainer && cart.length) {
+    emptyCart.classList.add('hidden')
+    cartProductContainer.classList.remove('hidden')
+    finishBuying.classList.remove('hidden')
 
-        actualizarCarrito();
-    }
+    showCartProducts()
+  }
+  // run function to display products
+  if (!cartContainer) showProducts()
 })
 
 // obtener datos
-async function getData () {
-    const response = await fetch(primerSeccionInicio ? "./productos.json" : "../productos.json");
-    const data = await response.json();
-    return data;
-};
+async function getData() {
+  const response = await fetch(
+    firstHomeSection ? './productos.json' : '../productos.json'
+  )
+  return response.json()
+}
 
 // función para agregar productos a las diferentes secciones
-function addProducts (productList, section) {
-    productList.forEach(prod => {
-        section.innerHTML += `
-                    <article class="col-xl-3 col-md-6 col-sm-6 my-2 sectorGaleria">
-                        <div class="card rounded-0">
-                            <img src="${primerSeccionInicio ? prod.img : `.${prod.img}`}" class="card-img-top" alt="${prod.tipo} ${prod.nombre}">
-                            <div class="card-body">
-                                <h2 class="card-title precio">$${prod.precio}</h2>
-                                <p class="card-text descripcion">${prod.nombre}</p>
-                                <a id="${prod.id}" class="btn botonComprar">Comprar</a>
-                            </div>
-                        </div>
-                    </article>
-                `;
+function addProducts(productList, section) {
+  productList.forEach((prod) => {
+    section.innerHTML += `
+      <article class="col-xl-3 col-md-6 col-sm-6 my-2 sectorGaleria">
+        <div class="card rounded-0">
+          <img
+            src="${firstHomeSection ? prod.img : `.${prod.img}`}"
+            class="card-img-top"
+            alt="${prod.type} ${prod.name}"
+          />
+          <div class="card-body">
+            <h2 class="card-title precio">$${prod.price}</h2>
+            <p class="card-text descripcion">${prod.name}</p>
+            <button
+              id="${prod.id}"
+              class="btn botonComprar"
+              onclick="addToCart(${prod.id})"
+            >
+              Comprar
+            </button>
+          </div>
+        </div>
+      </article>
+    `
+  })
+}
+
+// function to display products
+async function showProducts() {
+  const productList = await getData()
+
+  // add products per page
+  if (firstHomeSection) {
+    // separate products by sections
+    const productsFirstHomeSection = productList.slice(0, 4)
+    const productsSecondHomeSection = productList.slice(4, 8)
+    const productsThirdHomeSection = productList.slice(8, 12)
+
+    // add products to home
+    addProducts(productsFirstHomeSection, firstHomeSection)
+    addProducts(productsSecondHomeSection, secondHomeSection)
+    addProducts(productsThirdHomeSection, thirdHomeSection)
+  }
+
+  if (menSection) {
+    // filter men's products
+    const menProducts = productList.filter((prod) => prod.category === 'hombre')
+    // add products to men's page
+    addProducts(menProducts, menSection)
+  }
+
+  if (womenSection) {
+    // filter women's products
+    const womenProducts = productList.filter(
+      (prod) => prod.category === 'mujer'
+    )
+    // add products to women's page
+    addProducts(womenProducts, womenSection)
+  }
+
+  if (firstChildSection) {
+    // filter children's products
+    const childProducts = productList.filter(
+      (producto) => producto.category === 'niños'
+    )
+
+    // separate products by sections
+    const productsFirstChildSection = childProducts.slice(0, 4)
+    const productsSecondChildSection = childProducts.slice(4, 8)
+
+    // add products to children's page
+    addProducts(productsFirstChildSection, firstChildSection)
+    addProducts(productsSecondChildSection, secondChildSection)
+  }
+}
+
+// cart functions
+// add product to cart
+async function addToCart(id) {
+  const productList = await getData()
+  const productToBuy = productList.find((prod) => prod.id === id)
+
+  if (cart.some((prod) => prod.id === productToBuy.id)) {
+    cart.map((prod) => {
+      if (prod.id === productToBuy.id) {
+        prod.quantity++
+      }
     })
+  } else {
+    cart.push(productToBuy)
+  }
+
+  updateCartQuantity()
+  localStorage.setItem('cart', JSON.stringify(cart))
+
+  Toastify({
+    text: 'Tu producto se añadió al carrito',
+    duration: 3000,
+    style: {
+      color: 'black',
+      background: '#FFBD59',
+    },
+  }).showToast()
 }
 
-// funciones para añadir productos a las diferentes páginas
-async function mostrarProductos () {
-    const listaProductos = await getData();
+// update quantity of products in cart
+function updateCartQuantity() {
+  cartQuantity.textContent = cart.length
+}
 
-    // separar productos en categorías
-    const listaProductosHombre = listaProductos.filter(producto => producto.categoria == "hombre");
-    const listaProductosMujer = listaProductos.filter(producto => producto.categoria == "mujer");
-    const listaProductosNinios = listaProductos.filter(producto => producto.categoria == "niños");
-
-    // separar productos por secciones
-    const productosPrimerSeccionInicio = listaProductos.slice(0, 4);
-    const productosSegundaSeccionInicio = listaProductos.slice(4, 8);
-    const productosTerceraSeccionInicio = listaProductos.slice(8, 12);
-    const productosPrimerSeccionNinios = listaProductosNinios.slice(0, 4);
-    const productosSegundaSeccionNinios = listaProductosNinios.slice(4, 8);
-
-    // añadir productos por páginas
-    // añadir productos inicio
-    if (primerSeccionInicio) {
-        addProducts(productosPrimerSeccionInicio, primerSeccionInicio);
-
-        addProducts(productosSegundaSeccionInicio, segundaSeccionInicio);
-    
-        addProducts(productosTerceraSeccionInicio, terceraSeccionInicio);
-    }
-
-    // añadir productos hombres
-    if (seccionHombre) addProducts(listaProductosHombre, seccionHombre);
-
-    // añadir productos mujeres
-    if (seccionMujer) addProducts(listaProductosMujer, seccionMujer);
-
-    // añadir productos niños
-    if (primerSeccionNinios) {
-        addProducts(productosPrimerSeccionNinios, primerSeccionNinios);
-
-        addProducts(productosSegundaSeccionNinios, segundaSeccionNinios);
-    }
-    
-    // añadir funcionalidad a los botones de compra
-    const botonesComprar = document.querySelectorAll(".botonComprar");
-
-    botonesComprar.forEach(boton => {
-        boton.addEventListener("click", agregarAlCarrito);
+// add cart products to cart page
+function showCartProducts() {
+  cartProductContainer.innerHTML = ''
+  if (cart.length) {
+    cart.forEach((prod) => {
+      cartProductContainer.innerHTML += `
+        <article class="producto">
+          <img class="imgProductoCarrito"
+            src=".${prod.img}"
+            alt="${prod.type} ${prod.name}"
+          />
+          <span class="nombreProductoCarrito">${prod.name}</span>
+          <span class="precioProductoCarrito">
+            $${prod.price * prod.quantity}
+          </span>
+          <span class="cantidadProductoCarrito">
+            Cantidad: ${prod.quantity}
+          </span>
+          <button class="removeBtn" onclick="deleteFromCart(${prod.id})">
+            <i class="bi bi-trash"></i>
+          </button>
+        </article>
+      `
     })
+  }
+
+  updateCartTotalPrice()
 }
 
-// ejecutar función para añadir productos a las distintas páginas
-mostrarProductos();
-
-// funciones de carrito
-// agregar productos al carrito
-async function agregarAlCarrito (e) {
-    const boton = e.target;
-    const prodId = boton.getAttribute("id");
-
-    const productoYaExiste = carrito.some(prod => prod.id == prodId);
-
-    if (productoYaExiste) {
-        carrito.map(prod => {
-            if (prod.id == prodId) {
-                prod.cantidad++
-            }
-        })
-    } else {
-        const listaProductos = await getData();
-        const producto = listaProductos.find(prod => prod.id == prodId);
-        carrito.push(producto);
-    }
-
-    actualizarCantidadCarrito();
-    localStorage.setItem("carrito", JSON.stringify(carrito));
-
-    Toastify({
-        text: "Tu producto se añadió al carrito",
-        duration: 3000,
-        style: {
-            color: "black",
-            background: "#FFBD59",
-        }
-    }).showToast();
+// total sum of the prices of the products in the cart
+function updateCartTotalPrice() {
+  const total = cart.reduce((acc, prod) => acc + prod.price * prod.quantity, 0)
+  totalPrice.innerHTML = `$${total}`
 }
 
-// actualizar cantidad de productos del carrito
-function actualizarCantidadCarrito () {
-    cantidadProductos.textContent = carrito.length;
+// remove a product from the cart
+function deleteFromCart(prodId) {
+  const productIndex = cart.indexOf((prod) => prod.id === prodId)
+  cart.splice(productIndex, 1)
+
+  Toastify({
+    text: 'El producto fue eliminado del carrito',
+    duration: 3000,
+    style: {
+      color: 'black',
+      background: 'red',
+    },
+  }).showToast()
+
+  showCartProducts()
+
+  if (!cart.length) {
+    emptyCart.classList.remove('hidden')
+    cartProductContainer.classList.add('hidden')
+    finishBuying.classList.add('hidden')
+    localStorage.clear()
+  }
 }
 
-// agregar los productos al carrito
-function actualizarCarrito () {
-    contenedorProductosCarrito.innerHTML = '';
-    carrito.length !== 0
-        ? carrito.forEach(producto => {
-            contenedorProductosCarrito.innerHTML += `
-                <article class="producto">
-                    <img class="imgProductoCarrito" src=".${producto.img}" alt="${producto.tipo} ${producto.nombre}">
-                    <span class="nombreProductoCarrito">${producto.tipo} ${producto.nombre}</span>
-                    <span class="precioProductoCarrito">$${producto.precio * producto.cantidad}</span>
-                    <span class="cantidadProductoCarrito">Cantidad: ${producto.cantidad}</span>
-                    <button onclick="eliminarDelCarrito(${producto.id})" class="removeBtn"><i class="bi bi-trash"></i></button>
-                </article>
-            `
-        })
-        : null
+// complete the purchase
+cartContainer &&
+  buttonFinishBuying.addEventListener('click', () => {
+    Swal.fire(
+      'Compra realizada con éxito!',
+      'Gracias por elegirnos!',
+      'success'
+    )
+    localStorage.clear()
+    cart = []
 
-    actualizarTotalCarrito();
-}
-
-// suma total de precios del carrito
-function actualizarTotalCarrito () {
-    const total = carrito.reduce((acc, producto) => acc + producto.precio * producto.cantidad, 0);
-    precioTotal.innerHTML = `$${total}`;
-}
-
-
-// eliminar un producto del carrito
-function eliminarDelCarrito (prodId) {
-    const producto = carrito.find(prod => prod.id == prodId);
-
-    const indice = carrito.indexOf(producto);
-    carrito.splice(indice, 1);
-
-    Toastify({
-        text: "El producto fue eliminado del carrito",
-        duration: 3000,
-        style: {
-            color: "black",
-            background: "red",
-        }
-    }).showToast();
-
-    actualizarCarrito();
-
-    if (carrito.length == 0) {
-        carritoVacio.classList.remove("hidden");
-        contenedorProductosCarrito.classList.add("hidden");
-        finalizarCompra.classList.add("hidden");
-        localStorage.clear();
-    }
-}
-
-// finalizar compra
-contenedorCarrito &&
-    botonFinalizarCompra.addEventListener("click", () => {
-        Swal.fire(
-            'Compra realizada con éxito!',
-            'Gracias por elegirnos!',
-            'success'
-        );
-        localStorage.clear();
-        carrito = [];
-
-        carritoVacio.classList.remove("hidden");
-        contenedorProductosCarrito.classList.add("hidden");
-        finalizarCompra.classList.add("hidden");
-    })
+    emptyCart.classList.remove('hidden')
+    cartProductContainer.classList.add('hidden')
+    finishBuying.classList.add('hidden')
+  })
