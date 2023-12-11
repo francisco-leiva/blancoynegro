@@ -2,17 +2,15 @@
 
   
 
-Proyecto final del curso de JavaScript de CoderHouse. Fue inspirado en el comercio de un familiar cercano.
+Venta de zapatos y zapatillas para hombres, mujeres y niños. E-commerce hecho con JavaScript.
 
   
 
 ## Links
 
-  
 
-- GitHub Pages URL: https://francisco-leiva.github.io/javascript/
 
-- Live Site URL: https://blanco-y-negro.netlify.app/
+- Live Site URL: [Click here](https://blanco-y-negro.netlify.app/)
 
   
 
@@ -45,5 +43,3 @@ Proyecto final del curso de JavaScript de CoderHouse. Fue inspirado en el comerc
   
 
 - [LinkedIn](https://www.linkedin.com/in/franciscoleiva14/)
-
-- Frontend Mentor - [@francisco-leiva](https://www.frontendmentor.io/profile/francisco-leiva)
