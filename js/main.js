@@ -9,19 +9,16 @@ const secondChildSection = document.querySelector('#segundaSeccionNinios')
 
 // cart variables
 let cart = []
-const cartQuantity = document.querySelector('.cantidadCarrito')
+// cart page variables
 const cartContainer = document.querySelector('#carrito')
 const emptyCart = document.querySelector('.carritoVacio')
 const cartProductContainer = document.querySelector('#productosCarrito')
 const finishBuying = document.querySelector('.finalizarCompra')
-const totalPrice = document.querySelector('.precioTotalCarrito')
 const buttonFinishBuying = document.querySelector('.botonFinalizarCompra')
 
 // load products from storage
 document.addEventListener('DOMContentLoaded', () => {
   cart = JSON.parse(localStorage.getItem('cart')) || []
-
-  cartQuantity ? updateCartQuantity() : null
 
   if (cartContainer && cart.length) {
     emptyCart.classList.add('hidden')
@@ -30,11 +27,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     showCartProducts()
   }
-  // run function to display products
-  if (!cartContainer) showProducts()
+  // display products in product pages
+  if (!cartContainer) {
+    showProducts()
+    updateCartQuantity()
+  }
 })
 
-// obtener datos
+// fetch products
 async function getData() {
   const response = await fetch(
     firstHomeSection ? './productos.json' : '../productos.json'
@@ -42,7 +42,7 @@ async function getData() {
   return response.json()
 }
 
-// función para agregar productos a las diferentes secciones
+// function to add products to different sections
 function addProducts(productList, section) {
   productList.forEach((prod) => {
     section.innerHTML += `
@@ -77,14 +77,14 @@ async function showProducts() {
   // add products per page
   if (firstHomeSection) {
     // separate products by sections
-    const productsFirstHomeSection = productList.slice(0, 4)
-    const productsSecondHomeSection = productList.slice(4, 8)
-    const productsThirdHomeSection = productList.slice(8, 12)
+    const firstHomeSectionProducts = productList.slice(0, 4)
+    const secondHomeSectionProducts = productList.slice(4, 8)
+    const thirdHomeSectionProducts = productList.slice(8, 12)
 
     // add products to home
-    addProducts(productsFirstHomeSection, firstHomeSection)
-    addProducts(productsSecondHomeSection, secondHomeSection)
-    addProducts(productsThirdHomeSection, thirdHomeSection)
+    addProducts(firstHomeSectionProducts, firstHomeSection)
+    addProducts(secondHomeSectionProducts, secondHomeSection)
+    addProducts(thirdHomeSectionProducts, thirdHomeSection)
   }
 
   if (menSection) {
@@ -110,12 +110,12 @@ async function showProducts() {
     )
 
     // separate products by sections
-    const productsFirstChildSection = childProducts.slice(0, 4)
-    const productsSecondChildSection = childProducts.slice(4, 8)
+    const firstChildSectionProducts = childProducts.slice(0, 4)
+    const secondChildSectionProducts = childProducts.slice(4, 8)
 
     // add products to children's page
-    addProducts(productsFirstChildSection, firstChildSection)
-    addProducts(productsSecondChildSection, secondChildSection)
+    addProducts(firstChildSectionProducts, firstChildSection)
+    addProducts(secondChildSectionProducts, secondChildSection)
   }
 }
 
@@ -150,6 +150,7 @@ async function addToCart(id) {
 
 // update quantity of products in cart
 function updateCartQuantity() {
+  const cartQuantity = document.querySelector('.cantidadCarrito')
   cartQuantity.textContent = cart.length
 }
 
@@ -184,14 +185,16 @@ function showCartProducts() {
 
 // total sum of the prices of the products in the cart
 function updateCartTotalPrice() {
+  const cartTotalPrice = document.querySelector('.precioTotalCarrito')
   const total = cart.reduce((acc, prod) => acc + prod.price * prod.quantity, 0)
-  totalPrice.innerHTML = `$${total}`
+  cartTotalPrice.innerHTML = `$${total}`
 }
 
 // remove a product from the cart
 function deleteFromCart(prodId) {
-  const productIndex = cart.indexOf((prod) => prod.id === prodId)
-  cart.splice(productIndex, 1)
+  cart = cart.filter((prod) => prod.id !== prodId)
+
+  localStorage.setItem('cart', JSON.stringify(cart))
 
   Toastify({
     text: 'El producto fue eliminado del carrito',
