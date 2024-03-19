@@ -12,7 +12,8 @@ let cart = []
 // cart page variables
 const cartContainer = document.querySelector('#carrito')
 const emptyCart = document.querySelector('.carritoVacio')
-const cartProductContainer = document.querySelector('#productosCarrito')
+const shoppingContainer = document.querySelector('.contenedorCompra')
+const cartProducts = document.querySelector('#productosCarrito')
 const finishBuying = document.querySelector('.finalizarCompra')
 const buttonFinishBuying = document.querySelector('.botonFinalizarCompra')
 
@@ -22,8 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (cartContainer && cart.length) {
     emptyCart.classList.add('hidden')
-    cartProductContainer.classList.remove('hidden')
-    finishBuying.classList.remove('hidden')
+    shoppingContainer.classList.remove('hidden')
 
     showCartProducts()
   }
@@ -46,7 +46,7 @@ async function getData() {
 function addProducts(productList, section) {
   productList.forEach((prod) => {
     section.innerHTML += `
-      <article class="col-xl-3 col-md-6 col-sm-6 my-2 sectorGaleria">
+      <article class="producto">
         <div class="card rounded-0">
           <img
             src="${firstHomeSection ? prod.img : `.${prod.img}`}"
@@ -54,11 +54,11 @@ function addProducts(productList, section) {
             alt="${prod.type} ${prod.name}"
           />
           <div class="card-body">
-            <h2 class="card-title precio">$${prod.price}</h2>
-            <p class="card-text descripcion">${prod.name}</p>
+            <h2 class="card-title precioProd">$${prod.price}</h2>
+            <p class="card-text descripcionProd">${prod.name}</p>
             <button
               id="${prod.id}"
-              class="btn botonComprar"
+              class="btn btnCompra"
               onclick="addToCart(${prod.id})"
             >
               Comprar
@@ -156,20 +156,20 @@ function updateCartQuantity() {
 
 // add cart products to cart page
 function showCartProducts() {
-  cartProductContainer.innerHTML = ''
+  cartProducts.innerHTML = ''
   if (cart.length) {
     cart.forEach((prod) => {
-      cartProductContainer.innerHTML += `
-        <article class="producto">
-          <img class="imgProductoCarrito"
+      cartProducts.innerHTML += `
+        <article class="productoCarrito">
+          <img class="imgProdCarrito"
             src=".${prod.img}"
             alt="${prod.type} ${prod.name}"
           />
-          <span class="nombreProductoCarrito">${prod.name}</span>
-          <span class="precioProductoCarrito">
+          <span class="nombreProdCarrito">${prod.name}</span>
+          <span class="precioProdCarrito">
             $${prod.price * prod.quantity}
           </span>
-          <span class="cantidadProductoCarrito">
+          <span class="cantidadProdCarrito">
             Cantidad: ${prod.quantity}
           </span>
           <button class="removeBtn" onclick="deleteFromCart(${prod.id})">
@@ -209,8 +209,7 @@ function deleteFromCart(prodId) {
 
   if (!cart.length) {
     emptyCart.classList.remove('hidden')
-    cartProductContainer.classList.add('hidden')
-    finishBuying.classList.add('hidden')
+    shoppingContainer.classList.add('hidden')
     localStorage.clear()
   }
 }
@@ -227,6 +226,5 @@ cartContainer &&
     cart = []
 
     emptyCart.classList.remove('hidden')
-    cartProductContainer.classList.add('hidden')
-    finishBuying.classList.add('hidden')
+    shoppingContainer.classList.add('hidden')
   })

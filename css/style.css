@@ -1,191 +1,311 @@
 @charset "UTF-8";
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap");
 * {
-  font-family: 'Roboto', sans-serif;
-  font-size: 20px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   margin: 0;
-  padding: 0; }
+  padding: 0;
+}
 
-/* MIXIN */
 /* HEADER */
 header {
   width: 100%;
-  background-color: #B3B6B7; }
-  header .nombreEmpresa {
-    font-size: 1.5rem; }
+  background-color: #b3b6b7;
+}
 
-@media screen and (min-width: 600px) {
-  /* HEADER */
-  header .nombreEmpresa {
-    font-size: 2.5rem; } }
+header .linkInicio {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
 
-/* MAIN */
-/* PÁGINAS DE INICIO, MUJER, HOMBRE Y NIÑOS */
-.pageSector .sectorBanner {
-  width: 95%;
-  margin: 0.75rem auto; }
+header .titulo {
+  display: none;
+  margin: 0;
+}
 
-.pageSector .sectorGaleria {
-  text-align: center; }
-  .pageSector .sectorGaleria .precio {
-    font-size: 0.9rem;
-    font-weight: bold; }
-  .pageSector .sectorGaleria .descripcion {
-    font-size: 0.8rem; }
-  .pageSector .sectorGaleria .botonComprar {
-    font-size: 0.75rem;
-    color: white;
-    background-color: black;
-    border-radius: 0; }
-    .pageSector .sectorGaleria .botonComprar:hover {
-      background-color: white;
-      color: black;
-      transition: 0.5s; }
+header .logo {
+  width: 4.5rem;
+}
 
-/* PÁGINA DE CONTACTO */
+/* PRODUCTOS */
+.mainPage .carrusel {
+  max-width: 64rem;
+  width: 100%;
+  height: auto;
+  margin: 0.75rem auto;
+}
+
+.mainPage .carrusel img {
+  display: block;
+  width: 100%;
+  height: 10rem;
+}
+
+.mainPage .condicionesCompra {
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.mainPage .condicionesCompra img {
+  width: 100%;
+  height: 5rem;
+}
+
+.contenedorProductos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 20rem));
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+.mainPage .producto {
+  width: 100%;
+  text-align: center;
+}
+
+.mainPage .producto .precioProd {
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.mainPage .producto .descripcionProd {
+  font-size: 0.8rem;
+}
+
+.mainPage .producto .btnCompra {
+  font-size: 0.75rem;
+  color: white;
+  background-color: black;
+  border-radius: 0;
+}
+
+.mainPage .producto .btnCompra:hover {
+  background-color: white;
+  color: black;
+  transition: 0.5s;
+}
+
+.contenedorBanner {
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.bannerInPages {
+  margin-top: 0.5rem;
+}
+
+.contenedorBanner img {
+  max-width: 64rem;
+  width: 100%;
+  height: auto;
+}
+
+/* CONTACTO */
 .pageContact form {
-  background-color: #D0D3D4;
+  background-color: #d0d3d4;
   border-top: 1px solid black;
   border-bottom: 1px solid black;
   margin: 2rem auto;
   display: flex;
-  flex-direction: column; }
-  .pageContact form h2 {
-    text-align: center;
-    font-size: 1.5rem;
-    align-self: center;
-    margin-top: 0.5rem;
-    margin-bottom: 0; }
-  .pageContact form input {
-    width: 97%;
-    font-size: 1rem;
-    border: 1px solid black;
-    border-radius: 0.75rem;
-    outline: none;
-    padding: 0.5rem;
-    margin: 0.2rem 0.5rem; }
-  .pageContact form textarea {
-    width: 97%;
-    font-size: 1rem;
-    border: 1px solid black;
-    border-radius: 0.75rem;
-    outline: none;
-    padding: 0.5rem;
-    margin: 0.2rem 0.5rem;
-    resize: none; }
-  .pageContact form .error {
-    border: 2px solid red; }
-  .pageContact form .textoError {
-    font-size: 0.80rem;
-    color: red;
-    margin-bottom: 0.5rem;
-    margin-left: 1rem; }
-  .pageContact form .formButton {
-    font-family: inherit;
-    width: 10rem;
-    font-size: 1rem;
-    background-color: black;
-    color: white;
-    border: 1px solid black;
-    border-radius: 10px;
-    margin: 0 auto 0.5rem;
-    padding: 0.25rem; }
-    .pageContact form .formButton:hover {
-      background-color: white;
-      color: black;
-      transition: 0.5s; }
+  flex-direction: column;
+}
+.pageContact form h2 {
+  text-align: center;
+  font-size: 1.5rem;
+  align-self: center;
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+}
+.pageContact form input {
+  width: 97%;
+  font-size: 1rem;
+  border: 1px solid black;
+  border-radius: 0.75rem;
+  outline: none;
+  padding: 0.5rem;
+  margin: 0.2rem 0.5rem;
+}
+.pageContact form textarea {
+  width: 97%;
+  font-size: 1rem;
+  border: 1px solid black;
+  border-radius: 0.75rem;
+  outline: none;
+  padding: 0.5rem;
+  margin: 0.2rem 0.5rem;
+  resize: none;
+}
+.pageContact form .error {
+  border: 2px solid red;
+}
+.pageContact form .textoError {
+  font-size: 0.8rem;
+  color: red;
+  margin-bottom: 0.5rem;
+  margin-left: 1rem;
+}
+.pageContact form .formButton {
+  font-family: inherit;
+  width: 10rem;
+  font-size: 1rem;
+  background-color: black;
+  color: white;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: 0 auto 0.5rem;
+  padding: 0.25rem;
+}
+.pageContact form .formButton:hover {
+  background-color: white;
+  color: black;
+  transition: 0.5s;
+}
 
 .pageContact .map {
   height: 30rem;
   display: flex;
   flex-direction: column;
-  background-color: #D0D3D4;
+  background-color: #d0d3d4;
   text-align: center;
-  margin-bottom: 2rem; }
-  .pageContact .map iframe {
-    order: 3;
-    margin: 0 auto 0.25rem; }
-  .pageContact .map .mapText {
-    margin: 0.5rem; }
-    .pageContact .map .mapText p {
-      margin: 0; }
+  margin-bottom: 2rem;
+}
+.pageContact .map iframe {
+  order: 3;
+  margin: 0 auto 0.25rem;
+}
+.pageContact .map .mapText {
+  margin: 0.5rem;
+}
+.pageContact .map .mapText p {
+  margin: 0;
+}
 
 /* CARRITO */
 #carrito {
-  min-height: 380px;
-  width: 80%;
-  margin: 0.75rem auto;
-  background-color: #C8C8C8;
+  min-height: 23.5rem;
+  max-width: 56rem;
+  margin: 0.75rem 0.25rem;
+  padding: 0.5rem 0;
+  display: grid;
+  place-items: center;
+  background-color: #c8c8c8;
   border: 1px solid black;
-  border-radius: 20px; }
-  #carrito .carritoVacio {
-    text-align: center;
-    margin: 180px 0; }
-  #carrito .producto {
-    display: grid;
-    grid-template-columns: 28% 25% 25% 14% 8%;
-    gap: 0px 0px;
-    grid-auto-flow: row;
-    grid-template-areas: "img nombre precio cantidad eliminar";
-    justify-items: center;
-    align-items: center; }
-    #carrito .producto .imgProductoCarrito {
-      grid-area: img;
-      width: 8rem;
-      margin: 10px; }
-    #carrito .producto .nombreProductoCarrito {
-      grid-area: nombre; }
-    #carrito .producto .precioProductoCarrito {
-      grid-area: precio;
-      margin: 5px; }
-    #carrito .producto .cantidadProductoCarrito {
-      grid-area: cantidad; }
-    #carrito .producto .removeBtn {
-      grid-area: eliminar;
-      color: red;
-      border: none;
-      background-color: #C8C8C8; }
-  #carrito .finalizarCompra {
-    display: grid;
-    grid-template-columns: 53% 25% 22%;
-    grid-template-rows: 60px;
-    gap: 0px 0px;
-    grid-template-areas: "total precioTotal btn";
-    justify-items: center;
-    align-items: center;
-    margin: 15px 0; }
-    #carrito .finalizarCompra .totalCarrito {
-      grid-area: total;
-      justify-self: flex-end;
-      font-size: 1.7em;
-      margin: 0; }
-    #carrito .finalizarCompra .precioTotalCarrito {
-      grid-area: precioTotal;
-      font-size: 1.3em; }
-    #carrito .finalizarCompra .botonFinalizarCompra {
-      grid-area: btn;
-      font-size: .8em;
-      padding: .2em;
-      color: white;
-      background-color: black;
-      border-radius: 0; }
-      #carrito .finalizarCompra .botonFinalizarCompra:hover {
-        background-color: white;
-        color: black;
-        transition: 0.5s; }
-  #carrito .hidden {
-    display: none; }
+  border-radius: 1.25rem;
+}
+
+#carrito .contenedorCompra {
+  align-self: normal;
+  justify-self: normal;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+#carrito .contenedorCompra.hidden {
+  display: none;
+}
+
+#carrito .carritoVacio h3 {
+  margin: 0;
+}
+
+#carrito .carritoVacio.hidden {
+  display: none;
+}
+
+#productosCarrito {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+#carrito .productoCarrito {
+  display: grid;
+  grid-template-columns: 28% 25% 25% 14% 8%;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas: 'img nombre precio cantidad eliminar';
+  justify-items: center;
+  align-items: center;
+}
+
+#carrito .productoCarrito .imgProdCarrito {
+  grid-area: img;
+  width: 8rem;
+}
+
+#carrito .productoCarrito .nombreProdCarrito {
+  grid-area: nombre;
+}
+
+#carrito .productoCarrito .precioProdCarrito {
+  grid-area: precio;
+  margin: 5px;
+}
+
+#carrito .productoCarrito .cantidadProdCarrito {
+  grid-area: cantidad;
+}
+
+#carrito .productoCarrito .removeBtn {
+  grid-area: eliminar;
+  color: red;
+  border: none;
+  background-color: #c8c8c8;
+}
+
+#carrito .finalizarCompra {
+  display: grid;
+  grid-template-columns: 53% 25% 22%;
+  grid-template-rows: 60px;
+  gap: 0px 0px;
+  grid-template-areas: 'total precioTotal btn';
+  justify-items: center;
+  align-items: center;
+}
+
+#carrito .finalizarCompra .totalCarrito {
+  grid-area: total;
+  justify-self: flex-end;
+  font-size: 1.7em;
+  margin: 0;
+}
+
+#carrito .finalizarCompra .precioTotalCarrito {
+  grid-area: precioTotal;
+  font-size: 1.3em;
+}
+
+#carrito .finalizarCompra .botonFinalizarCompra {
+  grid-area: btn;
+  font-size: 0.8em;
+  padding: 0.2em;
+  color: white;
+  background-color: black;
+  border-radius: 0;
+}
+
+#carrito .finalizarCompra .botonFinalizarCompra:hover {
+  background-color: white;
+  color: black;
+  transition: 0.5s;
+}
 
 /* SWEET ALERT */
 #swal2-title.swal2-title {
-  color: black; }
+  color: black;
+}
 
 #swal2-html-container.swal2-html-container {
-  color: grey; }
+  color: grey;
+}
 
 .swal2-styled.swal2-confirm {
   color: white;
-  background-color: black; }
+  background-color: black;
+}
 
 /* BOTÓN CARRITO */
 .botonCarrito {
@@ -198,109 +318,186 @@ header {
   background-color: white;
   border: solid 1px black;
   border-radius: 0.5em;
-  padding: .4em; }
-  .botonCarrito:hover {
-    background-color: black;
-    color: white;
-    transition: 0.3s; }
-  .botonCarrito #cart {
-    font-size: 2em;
-    margin: .1em;
-    cursor: pointer; }
-  .botonCarrito .cantidadCarrito {
-    color: black;
-    position: absolute;
-    top: .1em;
-    right: .2em;
-    background-color: #B3B6B7;
-    padding: 0 .3em;
-    border-radius: 15px;
-    font-weight: bold; }
+  padding: 0.4em;
+}
+.botonCarrito:hover {
+  background-color: black;
+  color: white;
+  transition: 0.3s;
+}
+.botonCarrito #cart {
+  font-size: 2em;
+  margin: 0.1em;
+  cursor: pointer;
+}
+.botonCarrito .cantidadCarrito {
+  color: black;
+  position: absolute;
+  top: 0.1em;
+  right: 0.2em;
+  background-color: #b3b6b7;
+  padding: 0 0.3em;
+  border-radius: 15px;
+  font-weight: bold;
+}
 
-@media screen and (max-width: 576px) {
-  /* MAIN */
-  /* PÁGINAS DE INICIO, MUJER, HOMBRE Y NIÑOS */
-  .sectorGaleria {
-    width: 50%; } }
+/* FOOTER */
+footer {
+  background-color: #b3b6b7;
+}
+footer .socialMedia,
+footer .contacto {
+  margin: 0 0.5rem;
+  padding: 0.5rem 0;
+}
+footer .socialMedia h3,
+footer .contacto h3 {
+  font-size: 1rem;
+}
+footer .socialMedia p,
+footer .contacto p {
+  margin-bottom: 0.25rem;
+}
+footer .socialMedia a,
+footer .contacto a {
+  font-size: 0.75rem;
+  text-decoration: none;
+  color: black;
+}
+footer .contacto h3 {
+  font-size: 1rem;
+}
+footer .contacto p {
+  font-size: 0.75rem;
+  margin: 0;
+}
 
 @media screen and (min-width: 600px) {
+  /* HEADER */
+  header .titulo {
+    display: inline;
+    font-size: 2rem;
+  }
+
+  header .logo {
+    width: 5rem;
+  }
+
   /* MAIN */
-  /* PÁGINAS DE INICIO, MUJER, HOMBRE Y NIÑOS */
-  .sectorGaleria {
-    width: 25%; }
+  .mainPage .carrusel img {
+    height: auto;
+  }
+
+  .mainPage .condicionesCompra img {
+    width: 100%;
+    height: 7rem;
+  }
+
   /* PÁGINA DE CONTACTO */
   .pageContact form {
     width: 30rem;
     border: 1px solid black;
     border-radius: 0.75rem;
-    box-shadow: 0.25rem 0.20rem 0.5rem; }
-    .pageContact form h2 {
-      font-size: 2rem; }
-    .pageContact form input,
-    .pageContact form textarea {
-      font-size: 1.5rem; }
-    .pageContact form .formButton {
-      font-size: 1.5rem; } }
+    box-shadow: 0.25rem 0.2rem 0.5rem;
+  }
+  .pageContact form h2 {
+    font-size: 2rem;
+  }
+  .pageContact form input,
+  .pageContact form textarea {
+    font-size: 1.5rem;
+  }
+  .pageContact form .formButton {
+    font-size: 1.5rem;
+  }
+}
 
 @media screen and (min-width: 768px) {
+  /* HEADER */
+  header .titulo {
+    font-size: 2.5rem;
+  }
+
+  header .logo {
+    width: 6rem;
+  }
+
   /* PÁGINA DE CONTACTO */
   .pageContact .map {
     flex-direction: row;
     margin-left: 2rem;
     margin-right: 2rem;
     height: 25rem;
-    border-radius: 0.5rem; }
-    .pageContact .map iframe {
-      align-self: center;
-      order: -1;
-      margin: 0 0.75rem;
-      height: 90%;
-      border-radius: 0.5rem; }
-    .pageContact .map .mapText {
-      align-self: center;
-      width: 70%; } }
+    border-radius: 0.5rem;
+  }
+  .pageContact .map iframe {
+    align-self: center;
+    order: -1;
+    margin: 0 0.75rem;
+    height: 90%;
+    border-radius: 0.5rem;
+  }
+  .pageContact .map .mapText {
+    align-self: center;
+    width: 70%;
+  }
 
-/* FOOTER */
-footer {
-  background-color: #B3B6B7; }
-  footer .socialMedia, footer .contacto {
-    margin: 0 0.5rem;
-    padding: 0.5rem 0; }
-    footer .socialMedia h3, footer .contacto h3 {
-      font-size: 1rem; }
-    footer .socialMedia p, footer .contacto p {
-      margin-bottom: 0.25rem; }
-    footer .socialMedia a, footer .contacto a {
-      font-size: 0.75rem;
-      text-decoration: none;
-      color: black; }
-  footer .contacto h3 {
-    font-size: 1rem; }
-  footer .contacto p {
-    font-size: 0.75rem;
-    margin: 0; }
+  /* CARRITO */
+  #carrito {
+    min-height: 25.25rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
 
 @media screen and (min-width: 1024px) {
+  /* PRODUCTOS */
+  .carousel-item img {
+    height: 22rem;
+    aspect-ratio: auto;
+  }
+
+  .mainPage .condicionesCompra img {
+    height: 12rem;
+  }
+
+  .contenedorProductos {
+    grid-template-columns: repeat(4, 15.25rem);
+  }
+
   /* FOOTER */
   footer {
     display: grid;
     grid-template-columns: 35% 20% auto;
     grid-template-rows: min-content;
-    grid-template-areas: "contacto media ..."; }
-    footer .socialMedia, footer .contacto {
-      grid-area: media;
-      margin-bottom: 0; }
-      footer .socialMedia h3, footer .contacto h3 {
-        font-size: 1.5rem; }
-      footer .socialMedia p, footer .contacto p {
-        margin: 0.25rem 0; }
-      footer .socialMedia a, footer .contacto a {
-        font-size: 1.10rem; }
-    footer .contacto {
-      grid-area: contacto;
-      margin-bottom: 0; }
-      footer .contacto h3 {
-        font-size: 1.5rem; }
-      footer .contacto p {
-        font-size: 1.10rem;
-        margin: 0.25rem 0; } }
+    grid-template-areas: 'contacto media ...';
+  }
+  footer .socialMedia,
+  footer .contacto {
+    grid-area: media;
+    margin-bottom: 0;
+  }
+  footer .socialMedia h3,
+  footer .contacto h3 {
+    font-size: 1.5rem;
+  }
+  footer .socialMedia p,
+  footer .contacto p {
+    margin: 0.25rem 0;
+  }
+  footer .socialMedia a,
+  footer .contacto a {
+    font-size: 1.1rem;
+  }
+  footer .contacto {
+    grid-area: contacto;
+    margin-bottom: 0;
+  }
+  footer .contacto h3 {
+    font-size: 1.5rem;
+  }
+  footer .contacto p {
+    font-size: 1.1rem;
+    margin: 0.25rem 0;
+  }
+}
