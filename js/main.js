@@ -14,7 +14,6 @@ const cartContainer = document.querySelector('#carrito')
 const emptyCart = document.querySelector('.carritoVacio')
 const shoppingContainer = document.querySelector('.contenedorCompra')
 const cartProducts = document.querySelector('#productosCarrito')
-const finishBuying = document.querySelector('.finalizarCompra')
 const buttonFinishBuying = document.querySelector('.botonFinalizarCompra')
 
 // load products from storage

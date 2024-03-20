@@ -182,10 +182,18 @@ header .logo {
 }
 
 /* CARRITO */
+.mainCarrito {
+  min-height: calc(100vh - 18.4rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 #carrito {
-  min-height: 23.5rem;
+  flex: auto;
+  min-height: 20rem;
   max-width: 56rem;
-  margin: 0.75rem 0.25rem;
+  margin: 0.75rem;
   padding: 0.5rem 0;
   display: grid;
   place-items: center;
@@ -223,17 +231,19 @@ header .logo {
 
 #carrito .productoCarrito {
   display: grid;
-  grid-template-columns: 28% 25% 25% 14% 8%;
-  gap: 0px 0px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr 1fr;
   grid-auto-flow: row;
-  grid-template-areas: 'img nombre precio cantidad eliminar';
+  grid-template-areas:
+    'img nombre precio'
+    'img cantidad eliminar';
   justify-items: center;
   align-items: center;
 }
 
 #carrito .productoCarrito .imgProdCarrito {
   grid-area: img;
-  width: 8rem;
+  width: 5rem;
 }
 
 #carrito .productoCarrito .nombreProdCarrito {
@@ -256,38 +266,30 @@ header .logo {
   background-color: #c8c8c8;
 }
 
-#carrito .finalizarCompra {
-  display: grid;
-  grid-template-columns: 53% 25% 22%;
-  grid-template-rows: 60px;
-  gap: 0px 0px;
-  grid-template-areas: 'total precioTotal btn';
-  justify-items: center;
-  align-items: center;
+#carrito .totalCarrito {
+  margin: 0 0.75rem;
+  display: flex;
+  justify-content: space-between;
 }
 
-#carrito .finalizarCompra .totalCarrito {
-  grid-area: total;
-  justify-self: flex-end;
-  font-size: 1.7em;
+#carrito .totalCarrito h3 {
+  font-size: 1.7rem;
   margin: 0;
 }
 
-#carrito .finalizarCompra .precioTotalCarrito {
-  grid-area: precioTotal;
-  font-size: 1.3em;
+#carrito .totalCarrito .precioTotalCarrito {
+  font-size: 1.3rem;
 }
 
-#carrito .finalizarCompra .botonFinalizarCompra {
-  grid-area: btn;
-  font-size: 0.8em;
-  padding: 0.2em;
+#carrito .totalCarrito .botonFinalizarCompra {
+  font-size: 0.8rem;
+  padding: 0.2rem;
   color: white;
   background-color: black;
   border-radius: 0;
 }
 
-#carrito .finalizarCompra .botonFinalizarCompra:hover {
+#carrito .totalCarrito .botonFinalizarCompra:hover {
   background-color: white;
   color: black;
   transition: 0.5s;
@@ -409,6 +411,43 @@ footer .contacto p {
   }
   .pageContact form .formButton {
     font-size: 1.5rem;
+  }
+
+  /* CARRITO */
+  #carrito .productoCarrito {
+    grid-template-columns: 28% 25% 25% 14% 8%;
+    grid-template-rows: 1fr;
+    grid-template-areas: 'img nombre precio cantidad eliminar';
+  }
+
+  #carrito .productoCarrito .imgProdCarrito {
+    width: 8rem;
+  }
+
+  #carrito .productoCarrito .precioProdCarrito {
+    margin: 5px;
+  }
+
+  #carrito .totalCarrito {
+    display: grid;
+    grid-template-columns: 53% 25% 22%;
+    grid-template-rows: 60px;
+    grid-template-areas: 'total precioTotal btn';
+    justify-items: center;
+    align-items: center;
+  }
+
+  #carrito .totalCarrito h3 {
+    grid-area: total;
+    justify-self: flex-end;
+  }
+
+  #carrito .totalCarrito .precioTotalCarrito {
+    grid-area: precioTotal;
+  }
+
+  #carrito .totalCarrito .botonFinalizarCompra {
+    grid-area: btn;
   }
 }
 
